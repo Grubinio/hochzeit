@@ -9,3 +9,4 @@ instance/
 .env.*
 .DS_Store
 *.log
+.env
