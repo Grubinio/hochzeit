@@ -13,16 +13,16 @@
     <!-- 🧭 Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}">💍 Unsere Hochzeit</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">💍 Unsere Hochzeit</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('ablauf') }}">Ablauf</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('location') }}">Location</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('bilder') }}">Bilder</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('rsvp') }}">Zu-/Absagen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.ablauf') }}">Ablauf</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.location') }}">Location</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.bilder') }}">Bilder</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.rsvp') }}">Zu-/Absagen</a></li>
                 </ul>
             </div>
         </div>
