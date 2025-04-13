@@ -1,3 +1,9 @@
 body {
     cursor: url('herz.png'), auto;
   }
+
+  #musik-starten {
+    font-size: 1.2rem;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
