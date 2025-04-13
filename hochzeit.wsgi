@@ -6,4 +6,6 @@ import os
 sys.path.insert(0, '/var/www/hochzeit')
 sys.path.insert(0, '/var/www/hochzeit/venv/lib/python3.11/site-packages')
 
-from app import app as application  # Wichtig: "app" muss dein Flask-Objekt sein!
+# App aus Factory laden
+from app import create_app
+application = create_app()
