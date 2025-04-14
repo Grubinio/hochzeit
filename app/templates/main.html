@@ -3,7 +3,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Unsere Hochzeit</title>
+    <title>Hochzeit Rebecca&Georg</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='herz.png') }}">
@@ -54,15 +54,18 @@
     </div>
 </section>
 
-    <!-- Bilder -->
-    <section id="bilder" style="padding: 2rem; background-color: #f9f9f9;">
-        <h2>Bildergalerie</h2>
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-            <img src="{{ url_for('static', filename='2.jpg') }}" style="width: 200px; border-radius: 6px;">
-            <img src="{{ url_for('static', filename='3.jpg') }}" style="width: 200px; border-radius: 6px;">
-            <img src="{{ url_for('static', filename='4.jpg') }}" style="width: 200px; border-radius: 6px;">
-        </div>
-    </section>
+<!-- Bilder -->
+<section id="bilder" style="padding: 2rem; background-color: #f9f9f9;">
+    <h2>Bildergalerie</h2>
+    <div class="carousel">
+        <img class="carousel-image active" src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1">
+        <img class="carousel-image" src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2">
+        <img class="carousel-image" src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3">
+        <button class="carousel-btn prev" onclick="plusSlide(-1)">❮</button>
+        <button class="carousel-btn next" onclick="plusSlide(1)">❯</button>
+    </div>
+</section>
+
 
     <!-- RSVP -->
     <section id="rsvp" style="padding: 2rem;">
@@ -89,22 +92,22 @@
             <button type="submit">Antwort senden</button>
         </form>
     </section>
-<button id="musik-toggle" onclick="toggleMusik()">🔊</button>
+    <button id="musik-toggle" onclick="toggleMusik()">🔊</button>
 
-<script>
-    const audio = document.getElementById("hochzeitsmusik");
-    const btn = document.getElementById("musik-toggle");
+    <script>
+        const audio = document.getElementById("hochzeitsmusik");
+        const btn = document.getElementById("musik-toggle");
 
-    function toggleMusik() {
-        if (audio.paused) {
-            audio.play();
-            btn.textContent = "🔊";
-        } else {
-            audio.pause();
-            btn.textContent = "🔇";
+        function toggleMusik() {
+            if (audio.paused) {
+                audio.play();
+                btn.textContent = "🔊";
+            } else {
+                audio.pause();
+                btn.textContent = "🔇";
+            }
         }
-    }
-</script>
+    </script>
 
     <script>
         function toggleMap(id) {
@@ -112,5 +115,28 @@
             map.classList.toggle('collapsed');
         }
     </script>
+    <script>
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("carousel-image");
+    
+        function showSlide(index) {
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+    
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            slides[slideIndex].classList.add("active");
+        }
+    
+        function plusSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
+    
+        // Start mit dem ersten Bild
+        showSlide(slideIndex);
+    </script>
+    
 </body>
 </html>
