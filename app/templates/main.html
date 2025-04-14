@@ -57,14 +57,19 @@
 <!-- Bilder -->
 <section id="bilder" style="padding: 2rem; background-color: #f9f9f9;">
     <h2>Bildergalerie</h2>
-    <div class="carousel">
-        <img class="carousel-image active" src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1">
-        <img class="carousel-image" src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2">
-        <img class="carousel-image" src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3">
-        <button class="carousel-btn prev" onclick="plusSlide(-1)">❮</button>
-        <button class="carousel-btn next" onclick="plusSlide(1)">❯</button>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+  
+      <div class="carousel-track" id="carousel-track">
+        <img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1" class="carousel-slide">
+        <img src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2" class="carousel-slide">
+        <img src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3" class="carousel-slide">
+      </div>
+  
+      <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
     </div>
-</section>
+  </section>
+  
 
 
     <!-- RSVP -->
@@ -95,9 +100,10 @@
     <button id="musik-toggle" onclick="toggleMusik()">🔊</button>
 
     <script>
+        // Musik ein-/ausschalten
         const audio = document.getElementById("hochzeitsmusik");
         const btn = document.getElementById("musik-toggle");
-
+    
         function toggleMusik() {
             if (audio.paused) {
                 audio.play();
@@ -108,60 +114,58 @@
             }
         }
     </script>
-
+    
     <script>
+        // Karten ein-/ausklappen
         function toggleMap(id) {
             const map = document.getElementById(id);
             map.classList.toggle('collapsed');
         }
     </script>
+    
     <script>
-        let slideIndex = 0;
-        const slides = document.getElementsByClassName("carousel-image");
+        // Carousel (zentriert mit 3 Bildern)
+        let currentIndex = 1;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const track = document.getElementById('carousel-track');
     
-        function showSlide(index) {
-            setInterval(() => {
-                plusSlide(1);
-                }, 3000); // 3000 ms = 5 Sekunden
-            if (index >= slides.length) slideIndex = 0;
-            if (index < 0) slideIndex = slides.length - 1;
+        function updateCarousel() {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                slide.style.order = (i - currentIndex + slides.length) % slides.length;
+            });
+            slides[currentIndex].classList.add('active');
     
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove("active");
-            }
-            slides[slideIndex].classList.add("active");
+            const offset = -100 * currentIndex;
+            track.style.transform = `translateX(${offset}%)`;
         }
     
-        function plusSlide(n) {
-            slideIndex += n;
-            showSlide(slideIndex);
+        function changeSlide(direction) {
+            currentIndex = (currentIndex + direction + slides.length) % slides.length;
+            updateCarousel();
         }
     
-        // Start mit dem ersten Bild
-        showSlide(slideIndex);
-    </script>
-    <script>
+        // Swipe-Geste für Carousel
         let startX = 0;
     
-        const carousel = document.querySelector('.carousel');
+        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
     
-        carousel.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-    
-        carousel.addEventListener('touchend', e => {
-            let endX = e.changedTouches[0].clientX;
-            let diff = startX - endX;
-    
-            if (Math.abs(diff) > 50) { // Mindestabstand für Swipe
-                if (diff > 0) {
-                    plusSlide(1); // nach links gewischt
-                } else {
-                    plusSlide(-1); // nach rechts gewischt
-                }
+        track.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) changeSlide(1);
+                else changeSlide(-1);
             }
         }, { passive: true });
+    
+        // Automatischer Wechsel alle 5 Sekunden
+        setInterval(() => changeSlide(1), 5000);
+    
+        updateCarousel(); // Initial aufrufen
     </script>
+    
+    
     
     
 </body>
