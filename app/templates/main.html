@@ -66,15 +66,9 @@
       <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
   
       <div class="carousel-track" id="carousel-track">
-        <div class="carousel-slide">
-            <img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1">
-        </div>
-        <div class="carousel-slide">
-            <img src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2">
-        </div>
-        <div class="carousel-slide">
-            <img src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3">
-        </div>
+        <div class="carousel-slide"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1"></div>
+        <div class="carousel-slide"> <img src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2"></div>
+        <div class="carousel-slide"><img src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3"></div>
       </div>
   
       <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
