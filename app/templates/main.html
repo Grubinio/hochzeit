@@ -12,7 +12,7 @@
 
     <!-- Herz-Cursor & Musik -->
     <script src="{{ url_for('static', filename='cursor.js') }}"></script>
-    <audio autoplay loop hidden>
+    <audio id="hochzeitsmusik" autoplay loop hidden>
         <source src="{{ url_for('static', filename='Musik.mp3') }}" type="audio/mpeg">
     </audio>
 
@@ -59,7 +59,7 @@
         <h2>Bildergalerie</h2>
         <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
             <img src="{{ url_for('static', filename='2.jpg') }}" style="width: 200px; border-radius: 6px;">
-            <img src="{{ url_for('static', filename='3.png') }}" style="width: 200px; border-radius: 6px;">
+            <img src="{{ url_for('static', filename='3.jpg') }}" style="width: 200px; border-radius: 6px;">
             <img src="{{ url_for('static', filename='4.jpg') }}" style="width: 200px; border-radius: 6px;">
         </div>
     </section>
@@ -78,7 +78,7 @@
             <label for="nein">Nein</label><br><br>
             <label for="essen">Essenswunsch:</label><br>
             <select id="essen" name="essen" style="width: 100%; margin-bottom: 1rem;">
-                <option>Give me what you got</option>
+                <option>Give me all you got</option>
                 <option>Bitte vegetarisch</option>
                 <option>Bitte vegan</option>
             </select><br>
