@@ -120,6 +120,9 @@
         const slides = document.getElementsByClassName("carousel-image");
     
         function showSlide(index) {
+            setInterval(() => {
+                plusSlide(1);
+                }, 3000); // 3000 ms = 5 Sekunden
             if (index >= slides.length) slideIndex = 0;
             if (index < 0) slideIndex = slides.length - 1;
     
@@ -137,6 +140,29 @@
         // Start mit dem ersten Bild
         showSlide(slideIndex);
     </script>
+    <script>
+        let startX = 0;
+    
+        const carousel = document.querySelector('.carousel');
+    
+        carousel.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+    
+        carousel.addEventListener('touchend', e => {
+            let endX = e.changedTouches[0].clientX;
+            let diff = startX - endX;
+    
+            if (Math.abs(diff) > 50) { // Mindestabstand für Swipe
+                if (diff > 0) {
+                    plusSlide(1); // nach links gewischt
+                } else {
+                    plusSlide(-1); // nach rechts gewischt
+                }
+            }
+        }, { passive: true });
+    </script>
+    
     
 </body>
 </html>
