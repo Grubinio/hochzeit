@@ -89,19 +89,6 @@
   z-index: 2;
 }
 
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  background: rgba(255,255,255,0.8);
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  z-index: 10;
-  border-radius: 6px;
-}
-
 .carousel-btn:hover {
   background-color: rgba(255,255,255,0.9);
 }
