@@ -130,7 +130,7 @@
     </script>
     
     <script>
-        let currentIndex = 0;
+        let currentIndex = 1; // Startindex für den Slider
         const slides = document.querySelectorAll('.carousel-slide');
         const track = document.getElementById('carousel-track');
       
@@ -146,15 +146,15 @@
         }
       
         function changeSlide(direction) {
-          currentIndex = (currentIndex + direction + slides.length) % slides.length;
+          currentIndex = (currentIndex + direction + slides.length) % slides.length; // Zirkuläre Navigation
           updateCarousel();
         }
       
         // Auto-Slide
-        setInterval(() => changeSlide(1), 5000);
+        setInterval(() => changeSlide(1), 5000); // Alle 5 Sekunden wechseln
       
         // Swipe-Geste
-        let startX = 0;
+        let startX = 1;
         track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
         track.addEventListener('touchend', e => {
           const endX = e.changedTouches[0].clientX;
