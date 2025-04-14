@@ -89,6 +89,23 @@
             <button type="submit">Antwort senden</button>
         </form>
     </section>
+<button id="musik-toggle" onclick="toggleMusik()">🔊</button>
+
+<script>
+    const audio = document.getElementById("hochzeitsmusik");
+    const btn = document.getElementById("musik-toggle");
+
+    function toggleMusik() {
+        if (audio.paused) {
+            audio.play();
+            btn.textContent = "🔊";
+        } else {
+            audio.pause();
+            btn.textContent = "🔇";
+        }
+    }
+</script>
+
     <script>
         function toggleMap(id) {
             const map = document.getElementById(id);
