@@ -135,46 +135,19 @@
     </script>
     
     <script>
-        // Carousel (zentriert mit 3 Bildern)
-        let currentIndex = 1;
+        let currentIndex = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         const track = document.getElementById('carousel-track');
-    
+
         function updateCarousel() {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                slide.style.order = (i - currentIndex + slides.length) % slides.length;
-            });
-            slides[currentIndex].classList.add('active');
-    
-            const slideWidth = slides[0].offsetWidth + 16; // 16 = Abstand (gap)
-            const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
-            track.style.transform = `translateX(${offset}%)`;
+        const offset = -currentIndex * 100;
+        track.style.transform = `translateX(${offset}%)`;
         }
-    
+
         function changeSlide(direction) {
-            currentIndex = (currentIndex + direction + slides.length) % slides.length;
-            updateCarousel();
+        currentIndex = (currentIndex + direction + slides.length) % slides.length;
+        updateCarousel();
         }
-    
-        // Swipe-Geste für Carousel
-        let startX = 0;
-    
-        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
-    
-        track.addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) changeSlide(1);
-                else changeSlide(-1);
-            }
-        }, { passive: true });
-    
-        // Automatischer Wechsel alle 5 Sekunden
-        setInterval(() => changeSlide(1), 5000);
-    
-        updateCarousel(); // Initial aufrufen
     </script>
     
 </body>
