@@ -1,0 +1,84 @@
+<!-- templates/main.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Unsere Hochzeit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='herz.png') }}">
+</head>
+<body>
+
+    <!-- Herz-Cursor & Musik -->
+    <script src="{{ url_for('static', filename='cursor.js') }}"></script>
+    <audio autoplay loop hidden>
+        <source src="{{ url_for('static', filename='Musik.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <!-- Begrüßung -->
+    <section id="begruessung" style="padding: 3rem; text-align: center;">
+        <h1>Willkommen zu unserer Hochzeit 💍</h1>
+        <p>Wir freuen uns riesig, diesen besonderen Tag mit euch zu feiern!</p>
+        <img src="{{ url_for('static', filename='wir-zwei.jpg') }}" alt="Wir zwei" style="max-width: 100%; height: auto; border-radius: 8px;">
+    </section>
+
+    <!-- Ablauf -->
+    <section id="ablauf" style="padding: 2rem; background-color: #fdf6f8;">
+        <h2>Ablauf des Tages</h2>
+        <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
+            <li>⏰ 13:00 – Trauung im Standesamt Musterstadt</li>
+            <li>🥂 14:30 – Sektempfang im Schlossgarten</li>
+            <li>🍰 15:30 – Kaffee & Kuchen</li>
+            <li>🍽️ 18:00 – Abendessen & Reden</li>
+            <li>💃 20:00 – Party mit DJ</li>
+        </ul>
+    </section>
+
+    <!-- Location -->
+    <section id="location" style="padding: 2rem;">
+        <h2>Ort der Feier</h2>
+        <p>Schloss Musterburg, Musterstraße 1, 12345 Musterstadt</p>
+        <iframe src="https://www.google.com/maps/embed?..." width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+    </section>
+
+    <!-- Bilder -->
+    <section id="bilder" style="padding: 2rem; background-color: #f9f9f9;">
+        <h2>Bildergalerie</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <img src="{{ url_for('static', filename='bild1.jpg') }}" style="width: 200px; border-radius: 6px;">
+            <img src="{{ url_for('static', filename='bild2.jpg') }}" style="width: 200px; border-radius: 6px;">
+            <img src="{{ url_for('static', filename='bild3.jpg') }}" style="width: 200px; border-radius: 6px;">
+        </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp" style="padding: 2rem;">
+        <h2>Zu- oder Absagen</h2>
+        <form method="POST" action="/rsvp" style="max-width: 500px; margin: auto;">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required style="width: 100%; margin-bottom: 1rem;"><br>
+
+            <label>Kommst du?</label><br>
+            <input type="radio" id="ja" name="teilnahme" value="Ja" required>
+            <label for="ja">Ja</label>
+            <input type="radio" id="nein" name="teilnahme" value="Nein">
+            <label for="nein">Nein</label><br><br>
+
+            <label for="essen">Essenswunsch:</label><br>
+            <select id="essen" name="essen" style="width: 100%; margin-bottom: 1rem;">
+                <option>Fleisch</option>
+                <option>Fisch</option>
+                <option>Vegetarisch</option>
+                <option>Vegan</option>
+            </select><br>
+
+            <label for="bemerkung">Allergien oder Anmerkungen:</label><br>
+            <textarea id="bemerkung" name="bemerkung" rows="3" style="width: 100%;"></textarea><br><br>
+
+            <button type="submit">Antwort senden</button>
+        </form>
+    </section>
+
+</body>
+</html>
