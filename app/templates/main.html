@@ -141,7 +141,8 @@
             });
             slides[currentIndex].classList.add('active');
     
-            const offset = -100 * currentIndex;
+            const slideWidth = slides[0].offsetWidth + 16; // 16 = Abstand (gap)
+            const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
             track.style.transform = `translateX(${offset}%)`;
         }
     

@@ -61,6 +61,8 @@
 
 .carousel-track {
   display: flex;
+  width: fit-content;
+  margin: auto;
   transition: transform 0.5s ease;
   gap: 1rem;
   justify-content: center;
@@ -68,7 +70,8 @@
 }
 
 .carousel-slide {
-  width: 33.333%;
+  width: 300px;
+  flex: 0 0 auto; /* verhindert, dass das Bild sich streckt */
   opacity: 0.5;
   transform: scale(0.9);
   transition: transform 0.3s ease, opacity 0.3s ease;
