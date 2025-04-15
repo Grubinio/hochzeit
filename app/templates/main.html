@@ -148,8 +148,12 @@
         }
       
         function changeSlide(direction) { //direction is 1 oder -1
-          currentIndex = (currentIndex + direction + slides.length) % slides.length; // Zirkuläre Navigation
-          updateCarousel();
+            if (((currentIndex + direction + slides.length) % slides.length) === 0) {
+                currentIndex = 1; // Wenn wir am Ende sind, zurück zum ersten Bild
+            } else {
+            currentIndex = (currentIndex + direction + slides.length) % slides.length; // Zirkuläre Navigation
+            }
+            updateCarousel();
         }
       
     
