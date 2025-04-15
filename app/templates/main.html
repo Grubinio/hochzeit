@@ -137,7 +137,7 @@
       
         function updateCarousel() {
           const slideWidth = slides[0].offsetWidth + 16; // 16px = Abstand zwischen Slides (gap)
-          const offset = (slideWidth * currentIndex);// - (track.offsetWidth / 2) + (slideWidth / 2);
+          const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
           track.style.transform = `translateX(-${offset}px)`;
       
           // Nur das aktuelle Slide bekommt .active
