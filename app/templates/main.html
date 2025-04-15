@@ -6,6 +6,7 @@
     <title>Hochzeit Rebecca&Georg</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='picnic.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='herz.png') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-96x96.png') }}" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}" />
@@ -130,13 +131,13 @@
     </script>
     
     <script>
-        let currentIndex = 1; // Startindex für den Slider
+        let currentIndex = 0; // Startindex für den Slider
         const slides = document.querySelectorAll('.carousel-slide');
         const track = document.getElementById('carousel-track');
       
         function updateCarousel() {
           const slideWidth = slides[0].offsetWidth + 16; // 16px = Abstand zwischen Slides (gap)
-          const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
+          const offset = (slideWidth * currentIndex);// - (track.offsetWidth / 2) + (slideWidth / 2);
           track.style.transform = `translateX(-${offset}px)`;
       
           // Nur das aktuelle Slide bekommt .active
@@ -145,16 +146,14 @@
           });
         }
       
-        function changeSlide(direction) {
+        function changeSlide(direction) { //direction is 1 oder -1
           currentIndex = (currentIndex + direction + slides.length) % slides.length; // Zirkuläre Navigation
           updateCarousel();
         }
       
-        // Auto-Slide
-        setInterval(() => changeSlide(1), 5000); // Alle 5 Sekunden wechseln
-      
+    
         // Swipe-Geste
-        let startX = 1;
+        let startX = 0;
         track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
         track.addEventListener('touchend', e => {
           const endX = e.changedTouches[0].clientX;
