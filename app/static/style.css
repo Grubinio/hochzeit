@@ -62,12 +62,12 @@
 
 .carousel-track {
   display: flex;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
   gap: 1rem;
 }
 
 .carousel-slide {
-  flex: 0 0 80%; /* max-breite: 80% der Wrapper-Breite */
+  flex: 0 0 100%; /* max-breite: 80% der Wrapper-Breite */
   max-width: 300px;
   opacity: 0.5;
   transform: scale(0.9);
