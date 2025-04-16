@@ -179,35 +179,32 @@
         // Rücksprung bei Clone-Slide
         track.addEventListener('transitionend', () => {
             if (slides[currentIndex].classList.contains('clone')) {
-                // Schritt 1: Übergang deaktivieren
+                // 1. Übergang deaktivieren
                 track.style.transition = 'none';
 
-                // Schritt 2: Index auf echtes Slide setzen
+                // 2. Setze echten Index
                 if (currentIndex === 0) {
                 currentIndex = slideCount;
                 } else if (currentIndex === slides.length - 1) {
                 currentIndex = 1;
                 }
 
-                // Schritt 3: transform SOFORT setzen (ohne Transition)
+                // 3. Frame 1: Sofortiger Sprung
+                requestAnimationFrame(() => {
                 const slideWidth = slides[0].offsetWidth;
                 const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
                 track.style.transform = `translateX(-${offset}px)`;
 
-                // Schritt 4: Erzwinge Reflow und warte dann auf neuen Frame
+                // 4. Frame 2: Übergang reaktivieren und Klasse setzen
                 requestAnimationFrame(() => {
-                void track.offsetWidth;
-
-                // Schritt 5: nach kurzem Delay Transition aktivieren
-                setTimeout(() => {
+                    void track.offsetWidth; // reflow
                     track.style.transition = 'transform 0.5s ease';
-                    updateCarousel(); // auch .active Klasse aktualisieren
-                }, 20);
+                    updateCarousel();
+                });
                 });
             }
             });
 
-      
         // Initialisierung nach Ladezeit
         window.onload = () => setTimeout(updateCarousel, 100);
       </script>             
