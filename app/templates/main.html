@@ -128,78 +128,58 @@
     </script>
     <script>
         const track = document.getElementById('carousel-track');
-        let slides = Array.from(track.children);
-      
+        let slides = Array.from(document.querySelectorAll('.carousel-slide'));
         const slideCount = slides.length;
-        let currentIndex = 1; // Start bei erstem echten Slide (nach vorne geklontem letzten)
+        let currentIndex = 1;
       
-        // Klone erzeugen
+        // Klonen
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slideCount - 1].cloneNode(true);
-        firstClone.classList.add('clone');
-        lastClone.classList.add('clone');
+      
+        firstClone.id = 'first-clone';
+        lastClone.id = 'last-clone';
       
         track.appendChild(firstClone);
         track.insertBefore(lastClone, slides[0]);
       
-        slides = Array.from(track.children);
+        slides = Array.from(document.querySelectorAll('.carousel-slide'));
       
-        function updateCarousel({ skipActiveClass = false } = {}) {
-            const slideWidth = slides[0].offsetWidth;
-            const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
-            track.style.transform = `translateX(-${offset}px)`;
-                if (!skipActiveClass) {
-                    slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === currentIndex);
-                    });
-                }
-            }
-
+        const slideWidth = slides[0].offsetWidth;
+        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
       
-        function changeSlide(direction) {
-          if (track.style.transition === '') {
-            track.style.transition = 'transform 0.5s ease';
-          }
-          currentIndex += direction;
-          updateCarousel();
+        function updateSlidePosition() {
+          track.style.transition = 'transform 0.4s ease';
+          track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
         }
       
-        // Buttons
+        function changeSlide(direction) {
+          currentIndex += direction;
+          updateSlidePosition();
+        }
+      
+        // Wenn zu Fake-Slide gesprungen wurde → sofort zurückspringen
+        track.addEventListener('transitionend', () => {
+          if (slides[currentIndex].id === 'first-clone') {
+            track.style.transition = 'none';
+            currentIndex = 1;
+            track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+          }
+      
+          if (slides[currentIndex].id === 'last-clone') {
+            track.style.transition = 'none';
+            currentIndex = slideCount;
+            track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+          }
+        });
+      
+        // Pfeile
         document.querySelector('.next').addEventListener('click', () => changeSlide(1));
         document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
       
-        // Swipe-Gesten
-        let startX = 0;
-        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
-        track.addEventListener('touchend', e => {
-          const diff = startX - e.changedTouches[0].clientX;
-          if (Math.abs(diff) > 50) {
-            changeSlide(diff > 0 ? 1 : -1);
-          }
-        }, { passive: true });
+        // Auto
+        setInterval(() => changeSlide(1), 5000);
+      </script>
       
-        // Rücksprung bei Clone-Slide
-        track.addEventListener('transitionend', () => {
-            if (slides[currentIndex].classList.contains('clone')) {
-                track.style.transition = 'none';
-
-                if (currentIndex === 0) {
-                currentIndex = slideCount;
-                } else if (currentIndex === slides.length - 1) {
-                currentIndex = 1;
-                }
-
-                requestAnimationFrame(() => {
-                updateCarousel({ skipActiveClass: true }); // keine Klassen setzen!
-
-                requestAnimationFrame(() => {
-                    void track.offsetWidth;
-                    track.style.transition = 'transform 0.5s ease';
-                    updateCarousel(); // Jetzt Klassen aktualisieren
-                });
-                });
-            }
-        });
 
 
         // Initialisierung nach Ladezeit
