@@ -64,14 +64,14 @@
 <section id="bilder" style="padding: 2rem; background-color: #f9f9f9;">
     <h2>Bildergalerie</h2>
     <div class="carousel-wrapper">
-      <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+      <button class="carousel-btn prev">❮</button> //onclick="changeSlide(-1)""
         <div class="carousel-track" id="carousel-track">
             <div class="carousel-slide"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1"></div>
             <div class="carousel-slide"> <img src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2"></div>
             <div class="carousel-slide"><img src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3"></div>
             <div class="carousel-slide"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1"></div>
         </div>
-      <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+      <button class="carousel-btn next">❯</button> //onclick="changeSlide(1)"
     </div>
   </section>
   
@@ -129,56 +129,78 @@
     </script>
     <script>
         const track = document.getElementById('carousel-track');
-        let slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        let slides = Array.from(track.children);
         const slideCount = slides.length;
-        let currentIndex = 1;
+        let currentIndex = 1; // Start mit dem ersten echten Slide (nach dem ersten Clone)
       
-        // Klonen
+        // Fake-Slides vorne und hinten klonen
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slideCount - 1].cloneNode(true);
-      
-        firstClone.id = 'first-clone';
-        lastClone.id = 'last-clone';
+        firstClone.classList.add('clone');
+        lastClone.classList.add('clone');
       
         track.appendChild(firstClone);
         track.insertBefore(lastClone, slides[0]);
       
-        slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        slides = Array.from(track.children);
       
-        const slideWidth = slides[0].offsetWidth;
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+        function updateCarousel() {
+          const slideWidth = slides[0].offsetWidth;
+          const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
+          track.style.transform = `translateX(-${offset}px)`;
       
-        function updateSlidePosition() {
-          track.style.transition = 'transform 0.4s ease';
-          track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+          slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentIndex);
+          });
         }
       
         function changeSlide(direction) {
           currentIndex += direction;
-          updateSlidePosition();
+          updateCarousel();
         }
       
-        // Wenn zu Fake-Slide gesprungen wurde → sofort zurückspringen
-        track.addEventListener('transitionend', () => {
-          if (slides[currentIndex].id === 'first-clone') {
-            track.style.transition = 'none';
-            currentIndex = 1;
-            track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-          }
-      
-          if (slides[currentIndex].id === 'last-clone') {
-            track.style.transition = 'none';
-            currentIndex = slideCount;
-            track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-          }
-        });
-      
-        // Pfeile
+        // Buttons
         document.querySelector('.next').addEventListener('click', () => changeSlide(1));
         document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
       
         // Auto
         setInterval(() => changeSlide(1), 5000);
-      </script>    
+      
+        // Übergangsende: Zurückspringen bei Clone
+        track.addEventListener('transitionend', () => {
+          if (slides[currentIndex].classList.contains('clone')) {
+            track.style.transition = 'none';
+      
+            if (currentIndex === 0) {
+              currentIndex = slideCount;
+            } else if (currentIndex === slides.length - 1) {
+              currentIndex = 1;
+            }
+      
+            const slideWidth = slides[0].offsetWidth;
+            const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
+            track.style.transform = `translateX(-${offset}px)`;
+      
+            // reflow erzwingen
+            void track.offsetWidth;
+            track.style.transition = 'transform 0.5s ease';
+          }
+        });
+      
+        window.addEventListener('load', () => {
+          updateCarousel();
+        });
+      
+        // Swipe-Gesten
+        let startX = 0;
+        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+        track.addEventListener('touchend', e => {
+          const diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) changeSlide(1);
+            else changeSlide(-1);
+          }
+        }, { passive: true });
+      </script>        
 </body>
 </html>
