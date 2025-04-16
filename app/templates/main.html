@@ -66,7 +66,6 @@
     <div class="carousel-wrapper">
       <button class="carousel-btn prev">❮</button> <!--//onclick="changeSlide(-1)""-->
         <div class="carousel-track" id="carousel-track">
-           <!-- <div class="carousel-slide"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1"></div>-->
             <div class="carousel-slide"> <img src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2"></div>
             <div class="carousel-slide"><img src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3"></div>
             <div class="carousel-slide"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1"></div>
@@ -130,10 +129,11 @@
     <script>
         const track = document.getElementById('carousel-track');
         let slides = Array.from(track.children);
-        const slideCount = slides.length;
-        let currentIndex = 1; // Start mit dem ersten echten Slide (nach dem ersten Clone)
       
-        // Fake-Slides vorne und hinten klonen
+        const slideCount = slides.length;
+        let currentIndex = 1; // Start bei erstem echten Slide (nach vorne geklontem letzten)
+      
+        // Klone erzeugen
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slideCount - 1].cloneNode(true);
         firstClone.classList.add('clone');
@@ -155,6 +155,9 @@
         }
       
         function changeSlide(direction) {
+          if (track.style.transition === '') {
+            track.style.transition = 'transform 0.5s ease';
+          }
           currentIndex += direction;
           updateCarousel();
         }
@@ -163,12 +166,20 @@
         document.querySelector('.next').addEventListener('click', () => changeSlide(1));
         document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
       
-        // Auto
-        setInterval(() => changeSlide(1), 5000);
+        // Swipe-Gesten
+        let startX = 0;
+        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+        track.addEventListener('touchend', e => {
+          const diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) {
+            changeSlide(diff > 0 ? 1 : -1);
+          }
+        }, { passive: true });
       
-        // Übergangsende: Zurückspringen bei Clone
+        // Rücksprung bei Clone-Slide
         track.addEventListener('transitionend', () => {
           if (slides[currentIndex].classList.contains('clone')) {
+            // Sofortiger Sprung zurück auf echtes Slide
             track.style.transition = 'none';
       
             if (currentIndex === 0) {
@@ -177,30 +188,25 @@
               currentIndex = 1;
             }
       
+            // Setze neue Position
             const slideWidth = slides[0].offsetWidth;
             const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
             track.style.transform = `translateX(-${offset}px)`;
       
-            // reflow erzwingen
-            void track.offsetWidth;
-            track.style.transition = 'transform 0.5s ease';
+            // Reflow erzwingen, dann wieder Übergang aktivieren
+            setTimeout(() => {
+              void track.offsetWidth;
+              track.style.transition = 'transform 0.5s ease';
+              updateCarousel(); // sicherstellen, dass aktive Klasse stimmt
+            }, 20);
           }
         });
       
-        window.addEventListener('load', () => {
-          updateCarousel();
-        });
+        // Automatischer Wechsel
+        setInterval(() => changeSlide(1), 5000);
       
-        // Swipe-Gesten
-        let startX = 0;
-        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
-        track.addEventListener('touchend', e => {
-          const diff = startX - e.changedTouches[0].clientX;
-          if (Math.abs(diff) > 50) {
-            if (diff > 0) changeSlide(1);
-            else changeSlide(-1);
-          }
-        }, { passive: true });
-      </script>        
+        // Initialisierung nach Ladezeit
+        window.onload = () => setTimeout(updateCarousel, 100);
+      </script>             
 </body>
 </html>
