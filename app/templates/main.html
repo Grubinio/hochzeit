@@ -127,63 +127,46 @@
         }
     </script>
     <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
         const track = document.getElementById('carousel-track');
-        let slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        const slideCount = slides.length;
-        let currentIndex = 1;
       
-        // Klonen
-        const firstClone = slides[0].cloneNode(true);
-        const lastClone = slides[slideCount - 1].cloneNode(true);
+        function updateCarousel() {
+          const slideWidth = slides[0].offsetWidth + 16; // ggf. anpassen, wenn gap anders ist
+          const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
       
-        firstClone.id = 'first-clone';
-        lastClone.id = 'last-clone';
+          track.style.transform = `translateX(-${offset}px)`;
       
-        track.appendChild(firstClone);
-        track.insertBefore(lastClone, slides[0]);
-      
-        slides = Array.from(document.querySelectorAll('.carousel-slide'));
-      
-        const slideWidth = slides[0].offsetWidth;
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-      
-        function updateSlidePosition() {
-          track.style.transition = 'transform 0.4s ease';
-          track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+          // Nur das aktive Slide bekommt die Klasse 'active'
+          slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentIndex);
+          });
         }
       
         function changeSlide(direction) {
-          currentIndex += direction;
-          updateSlidePosition();
+          // Schleifenrotation mit Modulo
+          currentIndex = (currentIndex + direction + slides.length) % slides.length;
+          updateCarousel();
         }
       
-        // Wenn zu Fake-Slide gesprungen wurde → sofort zurückspringen
-        track.addEventListener('transitionend', () => {
-          if (slides[currentIndex].id === 'first-clone') {
-            track.style.transition = 'none';
-            currentIndex = 1;
-            track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-          }
-      
-          if (slides[currentIndex].id === 'last-clone') {
-            track.style.transition = 'none';
-            currentIndex = slideCount;
-            track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-          }
-        });
-      
-        // Pfeile
-        document.querySelector('.next').addEventListener('click', () => changeSlide(1));
-        document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
-      
-        // Auto
+        // Automatische Rotation
         setInterval(() => changeSlide(1), 5000);
-      </script>
       
-
-
-        // Initialisierung nach Ladezeit
-        window.onload = () => setTimeout(updateCarousel, 100);
-      </script>             
+        // Swipe-Gesten für Mobilgeräte
+        let startX = 0;
+        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+      
+        track.addEventListener('touchend', e => {
+          const diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) changeSlide(1);  // nach links wischen
+            else changeSlide(-1);         // nach rechts wischen
+          }
+        }, { passive: true });
+      
+        // Initiales Setup
+        updateCarousel();
+      </script>
+                   
 </body>
 </html>
