@@ -26,7 +26,7 @@
     <section id="begruessung" style="padding: 3rem; text-align: center;">
         <h1>Willkommen zu unserer Hochzeit 💍</h1>
         <p>Wir freuen uns riesig, diesen besonderen Tag mit euch zu feiern!</p>
-        <img src="{{ url_for('static', filename='1.jpg') }}" alt="Wir zwei" style="max-width: 100%; height: auto; border-radius: 8px;">
+        <img src="{{ url_for('static', filename='1.jpg') }}" alt="Wir zwei" style="max-width: 100%; height: auto; max-height: 300px; border-radius: 8px;">
     </section>
 
     <!-- Ablauf -->
@@ -178,32 +178,35 @@
       
         // Rücksprung bei Clone-Slide
         track.addEventListener('transitionend', () => {
-          if (slides[currentIndex].classList.contains('clone')) {
-            // Sofortiger Sprung zurück auf echtes Slide
-            track.style.transition = 'none';
-      
-            if (currentIndex === 0) {
-              currentIndex = slideCount;
-            } else if (currentIndex === slides.length - 1) {
-              currentIndex = 1;
+            if (slides[currentIndex].classList.contains('clone')) {
+                // Schritt 1: Übergang deaktivieren
+                track.style.transition = 'none';
+
+                // Schritt 2: Index auf echtes Slide setzen
+                if (currentIndex === 0) {
+                currentIndex = slideCount;
+                } else if (currentIndex === slides.length - 1) {
+                currentIndex = 1;
+                }
+
+                // Schritt 3: transform SOFORT setzen (ohne Transition)
+                const slideWidth = slides[0].offsetWidth;
+                const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
+                track.style.transform = `translateX(-${offset}px)`;
+
+                // Schritt 4: Erzwinge Reflow und warte dann auf neuen Frame
+                requestAnimationFrame(() => {
+                void track.offsetWidth;
+
+                // Schritt 5: nach kurzem Delay Transition aktivieren
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.5s ease';
+                    updateCarousel(); // auch .active Klasse aktualisieren
+                }, 20);
+                });
             }
-      
-            // Setze neue Position
-            const slideWidth = slides[0].offsetWidth;
-            const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
-            track.style.transform = `translateX(-${offset}px)`;
-      
-            // Reflow erzwingen, dann wieder Übergang aktivieren
-            setTimeout(() => {
-              void track.offsetWidth;
-              track.style.transition = 'transform 0.5s ease';
-              updateCarousel(); // sicherstellen, dass aktive Klasse stimmt
-            }, 20);
-          }
-        });
-      
-        // Automatischer Wechsel
-        setInterval(() => changeSlide(1), 5000);
+            });
+
       
         // Initialisierung nach Ladezeit
         window.onload = () => setTimeout(updateCarousel, 100);
