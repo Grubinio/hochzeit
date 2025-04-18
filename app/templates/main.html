@@ -3,16 +3,16 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Hochzeit Rebecca&Georg</title>
+    <title>Untitled</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='picnic.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='herz.png') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-96x96.png') }}" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}" />
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}" />
-    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}" />
+    <link rel="icon" type="image/png" href="{{ url_for('static/favicon', filename='favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static/favicon', filename='favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static/favicon', filename='favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static/favicon', filename='apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ url_for('static/favicon', filename='site.webmanifest') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -22,27 +22,46 @@
         <source src="{{ url_for('static', filename='Musik.mp3') }}" type="audio/mpeg">
     </audio>
 
+    <!--Hero GIF-->
+    <div class="hero">
+        <img src="app/static/RuG.png" alt="Top Bild">
+    </div>
     <!-- Begrüßung -->
-    <section id="begruessung" style="padding: 3rem; text-align: center;">
-        <h1>Willkommen zu unserer Hochzeit 💍</h1>
-        <p>Wir freuen uns riesig, diesen besonderen Tag mit euch zu feiern!</p>
-        <img src="{{ url_for('static', filename='1.jpg') }}" alt="Wir zwei" style="max-width: 100%; height: auto; max-height: 300px; border-radius: 8px;">
-    </section>
+    <div class="section">
+        <h1>PLEASE COME CELEBRATE LOVE WITH US.</h1>
+        <p><strong>12.07.2025 &nbsp;&nbsp; 17:00 UHR</strong></p>
+        <p><strong>EMBER OFC</strong></p>
+    </div>
+    <!-- Trauzeugen -->
+    <div class="section">
+        <h1>TRAUZEUGEN:</h1>
+        <div class="names">
+          <p>GEORG RICHTHOFEN</p>
+          <p>HANNAH WEIDNER</p>
+          <p>JAKOB RICHTER</p>
+          <p>LUCIA BUNNEMANN</p>
+          <p>MARKEIKE MARTIN</p>
+          <p>MARTIN MEUTER</p>
+        </div>
+    </div>
+    <!-- Geschenke -->
+    <div class="section">
+        <p>FÜR UNS IST ES DAS GRÖSSTE GESCHENK, MIT DIR ZU FEIERN.</p>
+        <p>FALLS DU UNS TROTZDEM ETWAS SCHENKEN MÖCHTEST,</p>
+        <p><strong>FREUEN WIR UNS ÜBER:</strong></p>
+        <p>DIE HOCHZEITSREISE</p>
+        <p>DIE LISTE</p>
+    </div>
+    <!-- RSVP -->
+    <div class="section">
+        <p><strong>EMBER OFC</strong> Wienerstraße 10, Berlin, Germany 10999</p>
+        <a href="#" class="rsvp-button">RSVP HERE</a>
+        <p>BISOUS</p>
+    </div>
 
-    <!-- Ablauf -->
-    <section id="ablauf" style="padding: 2rem; background-color: #fdf6f8;">
-        <h2>Ablauf des Tages</h2>
-        <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
-            <li>💍 12:00 – Trauung im Neuen Schloss Meersburg</li>
-            <li>🥂 12:30 – Empfang im Schlossgarten</li>
-            <li>🍖 13:30 – Mittagessen in der Gutsschänke 100m vom Schloss</li>
-            <li> </li>
-            <li>🍽️ 18:00 – Abendessen in der ess|bar in Konstanz</li>
-            <li>💃 22:00 – </li>
-        </ul>
-    </section>
 
-<!-- Ort der Trauung – einklappbar -->
+
+<!-- Ort der Trauung – einklappbar 
 <section id="trauung" style="padding: 2rem;">
     <h2 onclick="toggleMap('map1')" style="cursor: pointer;">📍 Trauung (🗺️Ausklappen)</h2>
     <p>Neues Schloss Meersburg, Schlossplatz 12, 88709 Meersburg</p>
@@ -50,57 +69,23 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2685.528381942147!2d9.269701375733698!3d47.69357838196807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479af8657a60569f%3A0x2f7f0a1765ad19ff!2sNeues%20Schloss%20Meersburg!5e0!3m2!1sde!2sit!4v1744611817340!5m2!1sde!2sit" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </section>
+-->
 
-<!-- Ort Abendessen – einklappbar -->
-<section id="abendessen" style="padding: 2rem;">
-    <h2 onclick="toggleMap('map2')" style="cursor: pointer;">🍽️ Abendessen (🗺️Ausklappen)</h2>
-    <p>ess|bar, Sigismundstraße 15, 78462 Konstanz</p>
-    <div id="map2" class="map-container collapsed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2687.3176687149094!2d9.172890675731503!3d47.65882488437056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479af71ddec8107b%3A0x86cb3570b6ac1720!2sess%2Fbar!5e0!3m2!1sde!2sit!4v1744611765790!5m2!1sde!2sit" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-</section>
-
-<!-- Bilder -->
+<!-- Bilder 
 <section id="bilder" style="padding: 2rem; background-color: #f9f9f9;">
     <h2>Bildergalerie</h2>
     <div class="carousel-wrapper">
-      <button class="carousel-btn prev">❮</button> <!--//onclick="changeSlide(-1)""-->
+      <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button> 
         <div class="carousel-track" id="carousel-track">
             <div class="carousel-slide"> <img src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2"></div>
             <div class="carousel-slide"><img src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3"></div>
             <div class="carousel-slide"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1"></div>
         </div>
-      <button class="carousel-btn next">❯</button> <!--//onclick="changeSlide(1)"-->
+      <button class="carousel-btn next" onclick="changeSlide(1)">❯</button> 
     </div>
   </section>
+-->
   
-
-
-    <!-- RSVP -->
-    <section id="rsvp" style="padding: 2rem;">
-        <h2>Zu- oder Absagen</h2>
-        <form method="POST" action="/rsvp" style="max-width: 500px; margin: auto;">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required style="width: 100%; margin-bottom: 1rem;"><br>
-
-            <label>Kommst Du/Ihr?</label><br>
-            <input type="radio" id="ja" name="teilnahme" value="Ja" required>
-            <label for="ja">Ja</label>
-            <input type="radio" id="nein" name="teilnahme" value="Nein">
-            <label for="nein">Nein</label><br><br>
-            <label for="essen">Essenswunsch:</label><br>
-            <select id="essen" name="essen" style="width: 100%; margin-bottom: 1rem;">
-                <option>Give me all you got</option>
-                <option>Bitte vegetarisch</option>
-                <option>Bitte vegan</option>
-            </select><br>
-
-            <label for="bemerkung">Allergien oder Anmerkungen:</label><br>
-            <textarea id="bemerkung" name="bemerkung" rows="3" style="width: 100%;"></textarea><br><br>
-
-            <button type="submit">Antwort senden</button>
-        </form>
-    </section>
     <button id="musik-toggle" onclick="toggleMusik()">🔊</button>
 
     <script>
@@ -126,6 +111,7 @@
             map.classList.toggle('collapsed');
         }
     </script>
+    <!--
     <script>
         let currentIndex = 0;
         const slides = document.querySelectorAll('.carousel-slide');
@@ -167,6 +153,8 @@
         // Initiales Setup
         updateCarousel();
       </script>
+    -->
+      
                    
 </body>
 </html>

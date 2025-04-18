@@ -1,126 +1,66 @@
 body {
   cursor: url('herz.png'), auto;
+  margin: 0;
+  padding: 0;
+  font-family: 'Konkhmer Sleokchher', cursive;
+  background-color: #ffffff;
+  color: #000;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-
-/* Google Maps responsive */
-.map-container {
-position: relative;
-width: 100%;
-padding-bottom: 56.25%; /* 16:9 */
-height: 0;
-overflow: hidden;
-border-radius: 8px;
-box-shadow: 0 0 8px rgba(0,0,0,0.1);
-transition: max-height 0.5s ease, padding-bottom 0.5s ease;
-max-height: 1000px;
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.map-container iframe {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-border: 0;
+.section {
+  padding: 2rem 1rem;
+  max-width: 800px;
 }
 
-/* Eingeklappt */
-.map-container.collapsed {
-padding-bottom: 0;
-max-height: 0;
+.section h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
-#musik-toggle {
-position: fixed;
-bottom: 20px;
-right: 20px;
-font-size: 1.5rem;
-background-color: #fff;
-border: 1px solid #ccc;
-border-radius: 50%;
-width: 48px;
-height: 48px;
-box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-cursor: pointer;
-z-index: 1000;
-transition: background-color 0.2s ease;
+.section p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
 }
 
-#musik-toggle:hover {
-background-color: #f8f8f8;
+.names {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
 }
 
-.carousel-wrapper {
-position: relative;
-width: 100%;
-max-width: 600px;
-margin: 2rem auto;
-overflow: hidden;
+.rsvp-button {
+  margin: 2rem 0;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
 }
 
-.carousel-track {
-display: flex;
-transition: transform 0.4s ease;
-gap: 1rem;
-will-change: transform;
-}
-
-.carousel-slide {
-flex: 0 0 100%; /* max-breite: 80% der Wrapper-Breite */
-max-width: 300px;
-opacity: 0.5;
-transform: scale(0.9);
-transition: transform 0.3s ease, opacity 0.3s ease;
-border-radius: 8px;
-box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-.carousel-slide img {
-width: 100%;
-height: auto;
-display: block;
-border-radius: 8px;
-}
-
-.carousel-slide.active {
-opacity: 1;
-transform: scale(1.05);
-z-index: 2;
-}
-
-.carousel-btn {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-font-size: 2rem;
-background: rgba(255, 255, 255, 0.8);
-border: none;
-padding: 0.5rem 0.8rem;
-cursor: pointer;
-z-index: 10;
-border-radius: 6px;
-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.carousel-btn:hover {
-background-color: rgba(255, 255, 255, 0.95);
-transform: translateY(-50%) scale(1.05);
-}
-
-.carousel-btn.prev {
-left: 10px;
-}
-
-.carousel-btn.next {
-right: 10px;
-}
 @media (max-width: 600px) {
-.carousel-track {
-  gap: 0.5rem; /* weniger Abstand zwischen den Slides */
-}
-.carousel-slide {
-  flex: 0 0 90%; /* max-breite: 90% der Wrapper-Breite */
-}
+  .section h1 {
+    font-size: 1.5rem;
+  }
+
+  .section p {
+    font-size: 1rem;
+  }
 }
