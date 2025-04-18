@@ -82,6 +82,9 @@ body {
   font-size: 15px;
   line-height: 27px;
 }
+.names p{
+  margin: 0.2rem 0;
+}
 
 .rsvp-button {
   font-weight: bold;
