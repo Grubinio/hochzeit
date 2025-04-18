@@ -4,7 +4,7 @@ html, body {
 body {
   cursor: url('herzG.png'), auto;
   margin: 0;
-  padding: 0;
+  padding: 0px;
   font-family: 'Konkhmer Sleokchher', cursive;
   background-color: #ffffff;
   background: #FFFFFF;
@@ -48,7 +48,7 @@ body {
 
 .hero {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 }
 .hero img {
@@ -58,7 +58,7 @@ body {
 }
 
 .section {
-  padding: 0 2rem 0 6rem;
+  padding: 2rem 5px 6rem 5px;
   max-width: 600px;
   transform: translateY(40px);
   animation: fadeInUp 0.8s ease-out forwards;
