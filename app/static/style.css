@@ -1,3 +1,6 @@
+html, body {
+  height: 100%;
+}
 body {
   cursor: url('herz.png'), auto;
   margin: 0;
@@ -9,13 +12,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 18px; /* vorher: 1.1rem -> zu klein */
+  line-height: 1.8; /* für mehr Abstand */
+  letter-spacing: 0.5px; /* optisch feiner */
 }
+
 .hero {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
 }
-
 .hero img {
   width: 100%;
   height: auto;
@@ -23,36 +29,38 @@ body {
 }
 
 .section {
-  padding: 2rem 1rem;
+  padding: 4rem 2rem;
   max-width: 800px;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease-out forwards;
 }
-
 .section h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
 }
-
 .section p {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
+  margin: 1rem 0;
+  font-size: 1.25rem;
 }
 
 .names {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 0.5rem;
-  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 2rem 0;
 }
 
 .rsvp-button {
-  margin: 2rem 0;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background-color: #000;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  background-color: black;
+  padding: 1rem 3rem;
+  border-radius: 0;
 }
 
 @media (max-width: 600px) {
@@ -62,5 +70,12 @@ body {
 
   .section p {
     font-size: 1rem;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
