@@ -16,7 +16,6 @@ body {
   font-size: 20px; 
   font-weight: 400;
   letter-spacing: 0.5px; /* optisch feiner */
-  opacity: 0;
 }
 
 .bisous-top {
@@ -26,7 +25,6 @@ body {
   font-weight: normal;
   letter-spacing: 1px;
   font-family: 'Konkhmer Sleokchher', cursive;
-  color: #000; /* oder ein sanftes Grau (#555), wenn es optisch dezenter sein soll */
 }
 
 .hero {
