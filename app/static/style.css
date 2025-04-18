@@ -58,7 +58,7 @@ body {
 }
 
 .section {
-  padding: 0 0 0 2rem;
+  padding: 0 2rem 0 2rem;
   max-width: 600px;
   transform: translateY(40px);
   animation: fadeInUp 0.8s ease-out forwards;
