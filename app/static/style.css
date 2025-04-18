@@ -78,8 +78,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding:0;
-  /*gap: 0.3rem;*/ 
-  margin: 0rem 0;
+  gap: 0.3rem;
   font-size: 15px;
   line-height: 27px;
 }
