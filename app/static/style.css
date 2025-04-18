@@ -79,6 +79,7 @@ body {
   background-color: rgb(255, 255, 255);
   padding: 1rem 3rem;
   border-radius: 0;
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {
