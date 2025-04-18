@@ -16,6 +16,7 @@ body {
   font-size: 20px; 
   font-weight: 400;
   letter-spacing: 0.5px; /* optisch feiner */
+  opacity: 0;
 }
 
 .bisous-top {
@@ -40,9 +41,8 @@ body {
 }
 
 .section {
-  padding: 4rem 2rem;
+  /*padding: 4rem 2rem;*/
   max-width: 600px;
-  opacity: 0;
   transform: translateY(40px);
   animation: fadeInUp 0.8s ease-out forwards;
   font-family: 'Konkhmer Sleokchher';
@@ -50,10 +50,7 @@ body {
   line-height: 36px;
   color: #000000;
   }
-.section h1 {
-  font-size: 1rem;
-  margin-bottom: 2rem;
-}
+
 .section p {
   /*margin: 1rem 0;*/
   font-size: 1.25rem;
@@ -68,7 +65,6 @@ body {
   margin: 0rem 0;
   font-size: 15px;
   line-height: 27px;
-  opacity: 0.8; /* etwas transparenter */
 }
 
 .rsvp-button {
