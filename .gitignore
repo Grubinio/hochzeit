@@ -1,4 +1,6 @@
 venv/
+kopien/
+figma/
 __pycache__/
 *.pyc
 *.pyo
