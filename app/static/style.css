@@ -50,7 +50,6 @@ body {
   font-weight: 400;
   font-size: 20px;
   line-height: 36px;
-  text-align: center;
   color: #000000;
   }
 .section h1 {
@@ -59,7 +58,7 @@ body {
   margin-bottom: 2rem;
 }
 .section p {
-  margin: 1rem 0;
+  /*margin: 1rem 0;*/
   font-size: 1.25rem;
 }
 
