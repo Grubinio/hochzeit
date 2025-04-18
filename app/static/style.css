@@ -12,7 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 18px; /* vorher: 1.1rem -> zu klein */
+  font-size: 1rem; 
   line-height: 1.8; /* für mehr Abstand */
   letter-spacing: 0.5px; /* optisch feiner */
 }
@@ -59,8 +59,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
-  margin: 2rem 0;
+  gap: 0.3rem; 
+  margin: 1rem 0;
+  font-size: 0.95rem; /* vorher: 1.2rem -> zu groß */
+  opacity: 0.8; /* etwas transparenter */
 }
 
 .rsvp-button {
