@@ -35,3 +35,6 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('main.login'))
 
+@main.route('/antwort', methods=['GET', 'POST'])
+def antwort():
+    return render_template('zusage.html')
