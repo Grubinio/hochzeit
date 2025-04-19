@@ -36,6 +36,8 @@ def logout():
 @main.route('/antwort', methods=['GET', 'POST'])
 def antwort():
     if request.method == 'POST':
+        print("Formulardaten empfangen!")
+        print(request.form)  # zeigt alle Felder im Terminal
         name = request.form['name']
         email = request.form['email']
         zusage = request.form['zusage']
