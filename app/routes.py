@@ -37,4 +37,11 @@ def logout():
 
 @main.route('/antwort', methods=['GET', 'POST'])
 def antwort():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        zusage = request.form['zusage']
+        nachricht = request.form.get('nachricht', '')
+        flash("Danke für deine Antwort!", "success")
+        return redirect(url_for('main.antwort'))
     return render_template('zusage.html')
