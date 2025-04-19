@@ -26,22 +26,32 @@
     <div class="hero">
         <img src="{{ url_for('static', filename='RuG.png') }}" alt="Top Bild">
     </div>
-    <form method="POST" action="{{ url_for('main.antwort') }}">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required><br>
+    <form method="POST" action="{{ url_for('main.antwort') }}" class="rsvp-form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required>
+        </div>
     
-        <label for="email">E-Mail:</label>
-        <input type="email" name="email" required><br>
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" name="email" id="email" required>
+        </div>
     
-        <label>Kommt ihr?</label><br>
-        <input type="radio" name="zusage" value="Ja" required> Ja<br>
-        <input type="radio" name="zusage" value="Nein"> Nein<br>
-        <input type="radio" name="zusage" value="Unentschieden"> Weiß noch nicht<br>
+        <div class="form-group">
+            <label>Kommt ihr?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="zusage" value="Ja" required> Ja</label>
+                <label><input type="radio" name="zusage" value="Nein"> Nein</label>
+                <label><input type="radio" name="zusage" value="Unentschieden"> Weiß noch nicht</label>
+            </div>
+        </div>
     
-        <label for="nachricht">Nachricht:</label><br>
-        <textarea name="nachricht"></textarea><br>
+        <div class="form-group">
+            <label for="nachricht">Nachricht</label>
+            <textarea name="nachricht" id="nachricht" rows="4"></textarea>
+        </div>
     
-        <button type="submit">Absenden</button>
+        <button type="submit" class="submit-button">💌 Absenden</button>
     </form>
    
     
