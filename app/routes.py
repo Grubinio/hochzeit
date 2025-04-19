@@ -54,4 +54,4 @@ def antwort():
         flash("Danke für deine Antwort!", "success")
         return redirect(url_for('antwort'))
 
-    return render_template('antwort.html')
+    return render_template('zusage.html')
