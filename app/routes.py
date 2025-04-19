@@ -1,6 +1,9 @@
 # app/routes.py
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from app.db import get_db_connection
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 
 main = Blueprint('main', __name__)
 
@@ -35,7 +38,9 @@ def logout():
 
 @main.route('/antwort', methods=['GET', 'POST'])
 def antwort():
+    logging.debug("Route /antwort wurde aufgerufen")
     if request.method == 'POST':
+        logging.debug("Formulardaten empfangen: %s", request.form)
         print("Formulardaten empfangen!")
         print(request.form)  # zeigt alle Felder im Terminal
         name = request.form['name']
