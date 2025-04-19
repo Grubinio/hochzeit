@@ -27,7 +27,7 @@
         <img src="{{ url_for('static', filename='RuG.png') }}" alt="Top Bild">
     </div>
 
-    <form method="POST" action="{{ url_for('antwort') }}">
+    <form method="POST" action="{{ url_for('main.antwort') }}">
         <label for="name">Name:</label>
         <input type="text" name="name" required><br>
     

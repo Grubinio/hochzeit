@@ -11,7 +11,7 @@ def create_app():
 
     from .routes import main
     app.register_blueprint(main)
-
+    app.config['DEBUG'] = True
     return app
 
 if __name__ == '__main__':
