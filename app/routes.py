@@ -41,15 +41,15 @@ def antwort():
         zusage = request.form['zusage']
         nachricht = request.form.get('nachricht', '')
 
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("""
-            INSERT INTO antworten (name, email, zusage, nachricht)
-            VALUES (%s, %s, %s, %s)
-        """, (name, email, zusage, nachricht))
-        conn.commit()
-        cursor.close()
-        conn.close()
+        #conn = get_db_connection()
+        #cursor = conn.cursor()
+        #cursor.execute("""
+        #    INSERT INTO antworten (name, email, zusage, nachricht)
+        #    VALUES (%s, %s, %s, %s)
+        #""", (name, email, zusage, nachricht))
+        #conn.commit()
+        #cursor.close()
+        #conn.close()
 
         flash("Danke für deine Antwort!", "success")
         return redirect(url_for('antwort'))
