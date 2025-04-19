@@ -1,0 +1,69 @@
+<!-- templates/main.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Rebecca&Georg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='herzG.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}" />
+</head>
+<body>
+    <!-- Herz-Cursor & Musik -->
+    <!--<script src="{{ url_for('static', filename='cursor.js') }}"></script>-->
+    <audio id="hochzeitsmusik" autoplay loop hidden>
+        <source src="{{ url_for('static', filename='Musik.mp3') }}" type="audio/mpeg">
+    </audio>
+    <!--Bisous-->
+    <div class="bisous-top"><strong>BISOUS</strong></div>
+    <!--Hero GIF-->
+    <div class="hero">
+        <img src="{{ url_for('static', filename='RuG.png') }}" alt="Top Bild">
+    </div>
+
+    <form method="POST" action="{{ url_for('antwort') }}">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br>
+    
+        <label for="email">E-Mail:</label>
+        <input type="email" name="email" required><br>
+    
+        <label>Kommt ihr?</label><br>
+        <input type="radio" name="zusage" value="Ja" required> Ja<br>
+        <input type="radio" name="zusage" value="Nein"> Nein<br>
+        <input type="radio" name="zusage" value="Unentschieden"> Weiß noch nicht<br>
+    
+        <label for="nachricht">Nachricht:</label><br>
+        <textarea name="nachricht"></textarea><br>
+    
+        <button type="submit">Absenden</button>
+    </form>
+    
+
+
+
+    <button id="musik-toggle" onclick="toggleMusik()">🔊</button>
+
+    <script>
+        // Musik ein-/ausschalten
+        const audio = document.getElementById("hochzeitsmusik");
+        const btn = document.getElementById("musik-toggle");
+    
+        function toggleMusik() {
+            if (audio.paused) {
+                audio.play();
+                btn.textContent = "🔊";
+            } else {
+                audio.pause();
+                btn.textContent = "🔇";
+            }
+        }
+    </script>           
+</body>
+</html>
