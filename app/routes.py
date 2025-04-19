@@ -35,30 +35,3 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('main.login'))
 
-
-@main.route('/antwort', methods=['GET', 'POST'])
-def antwort():
-    logging.debug("Route /antwort wurde aufgerufen")
-    if request.method == 'POST':
-        logging.debug("Formulardaten empfangen: %s", request.form)
-        print("Formulardaten empfangen!")
-        print(request.form)  # zeigt alle Felder im Terminal
-        name = request.form['name']
-        email = request.form['email']
-        zusage = request.form['zusage']
-        nachricht = request.form.get('nachricht', '')
-
-        #conn = get_db_connection()
-        #cursor = conn.cursor()
-        #cursor.execute("""
-        #    INSERT INTO antworten (name, email, zusage, nachricht)
-        #    VALUES (%s, %s, %s, %s)
-        #""", (name, email, zusage, nachricht))
-        #conn.commit()
-        #cursor.close()
-        #conn.close()
-
-        flash("Danke für deine Antwort!", "success")
-        return redirect(url_for('main.antwort'))
-
-    return render_template('zusage.html')
