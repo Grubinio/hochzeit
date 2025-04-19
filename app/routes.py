@@ -52,6 +52,6 @@ def antwort():
         #conn.close()
 
         flash("Danke für deine Antwort!", "success")
-        return redirect(url_for('antwort'))
+        return redirect(url_for('main.antwort'))
 
     return render_template('zusage.html')
