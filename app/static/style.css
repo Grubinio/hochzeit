@@ -150,6 +150,7 @@ body {
   display: block;
   margin-bottom: 0.4rem;
   font-weight: normal;
+  padding: 0;
 }
 
 .submit-button {
