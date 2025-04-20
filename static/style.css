@@ -47,6 +47,13 @@ a {
   cursor: pointer;
   z-index: 1000;
   transition: background-color 0.2s ease;
+  /* NEU: Zentrierung */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+
   }
   #musik-toggle:hover {
   background-color: #f8f8f8;
