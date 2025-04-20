@@ -3,7 +3,7 @@ import os
 
 from dotenv import load_dotenv
 #dotenv_path = Path(__file__).resolve().parent / '.env'
-load_dotenv()
+load_dotenv('/var/www/hochzeit/.env')
 
 
 
