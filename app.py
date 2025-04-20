@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import os
 
 from dotenv import load_dotenv
-dotenv_path = Path(__file__).resolve().parent / '.env'
-load_dotenv(dotenv_path)
+#dotenv_path = Path(__file__).resolve().parent / '.env'
+load_dotenv()
 
 
 
