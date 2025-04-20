@@ -27,6 +27,12 @@
       text-align: center;
     }
 
+    .password-wrapper {
+        display: block;
+        position: relative;
+        margin-right: 25px;
+      }
+
     form {
       background-color: white;
       padding: 2rem;
@@ -34,6 +40,7 @@
 
     input.form-control {
       display: block;
+      margin: 0 auto;
       width: 100%;
       padding: 0.75rem;
       font-size: 1rem;
@@ -43,8 +50,9 @@
     }
 
     button.btn {
-      display: inline-block;
-      width: 100%;
+      display: block;
+      margin: 0 auto;
+      width: 50%;
       padding: 0.75rem;
       font-size: 1rem;
       font-weight: 500;
@@ -84,7 +92,7 @@
     <form method="POST">
       <div class="password-wrapper">
         <input type="password" class="form-control" name="password" placeholder="Kennwort" required>
-        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="eye-icon"></i>
+        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="eye-icon" title="Passwort anzeigen/ausblenden"></i>
       </div>
       <button type="submit" class="btn">Einloggen</button>
     </form>
