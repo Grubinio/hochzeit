@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except Exception as e:
-    print("Fehler beim dotenv-Import:", e)
+from dotenv import load_dotenv
+dotenv_path = Path(__file__).resolve().parent / '.env'
+load_dotenv(dotenv_path)
+
 
 
 app = Flask(__name__)
@@ -18,9 +17,9 @@ PW_BOTH = os.getenv("PASSWORD_BOTH")
 
 
 print("== DEBUG START ==")
-print("PW_MEERSBURG:", repr(PW_MEERSBURG))
-print("PW_MAIN:", repr(PW_MAIN))
-print("PW_BOTH:", repr(PW_BOTH))
+print("PW_MEERSBURG:", repr(os.getenv("PASSWORD_MEERSBURG")))
+print("PW_MAIN:", repr(os.getenv("PASSWORD_MAIN")))
+print("PW_BOTH:", repr(os.getenv("PASSWORD_BOTH")))
 print("== DEBUG END ==")
 
 
