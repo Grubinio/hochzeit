@@ -13,6 +13,10 @@ PW_MEERSBURG = os.getenv("PASSWORD_MEERSBURG")
 PW_MAIN = os.getenv("PASSWORD_MAIN")
 PW_BOTH = os.getenv("PASSWORD_BOTH")
 
+# Konfiguration für Sessions
+app.config['SESSION_COOKIE_SECURE'] = True          # nur über HTTPS
+app.config['SESSION_COOKIE_HTTPONLY'] = True        # nicht per JS lesbar
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'       # gegen CSRF
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -52,7 +56,7 @@ def logout():
 
 # Nur für lokalen Test
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run() #debug=True
 
 @app.route('/antwort', methods=['GET', 'POST'])
 def antwort():
