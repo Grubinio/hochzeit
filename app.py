@@ -16,15 +16,19 @@ PW_MEERSBURG = os.getenv("PASSWORD_MEERSBURG")
 PW_MAIN = os.getenv("PASSWORD_MAIN")
 PW_BOTH = os.getenv("PASSWORD_BOTH")
 
-print("PW_MEERSBURG:", PW_MEERSBURG)
-print("PW_MAIN:", PW_MAIN)
-print("PW_BOTH:", PW_BOTH)
+
+print("== DEBUG START ==")
+print("PW_MEERSBURG:", repr(PW_MEERSBURG))
+print("PW_MAIN:", repr(PW_MAIN))
+print("PW_BOTH:", repr(PW_BOTH))
+print("== DEBUG END ==")
+
 
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        entered_pw = request.form.get('password')
+        entered_pw = request.form.get('password').strip()
 
         if entered_pw == PW_MEERSBURG:
             session['access'] = 'meersburg'
