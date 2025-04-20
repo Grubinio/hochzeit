@@ -1,0 +1,58 @@
+<!-- templates/main.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Rebecca&Georg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='herzG.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}" />
+</head>
+<body>
+    <!-- Herz-Cursor & Musik -->
+    <!--<script src="{{ url_for('static', filename='cursor.js') }}"></script>-->
+    <audio id="hochzeitsmusik" autoplay loop hidden>
+        <source src="{{ url_for('static', filename='Musik.mp3') }}" type="audio/mpeg">
+    </audio>
+    <!--Bisous-->
+    <div class="bisous-top"><strong>BISOUS</strong></div>
+    <!--Hero GIF-->
+    <div class="hero">
+        <img src="{{ url_for('static', filename='RuG.png') }}" alt="Top Bild">
+    </div>
+    <form method="POST" action="{{ url_for('antwort') }}" class="rsvp-form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+    
+        <div class="form-group">
+            <label>Kommt ihr?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="zusage" value="Ja" required> Ja</label>
+                <label><input type="radio" name="zusage" value="Nein"> Nein</label>
+                <label><input type="radio" name="zusage" value="Unentschieden"> Weiß noch nicht</label>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="nachricht">Nachricht</label>
+            <textarea name="nachricht" id="nachricht" rows="4"></textarea>
+        </div>
+    
+        <button type="submit" class="submit-button">💌 Absenden</button>
+    </form>
+        
+</body>
+</html>

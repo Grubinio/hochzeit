@@ -1,9 +1,93 @@
 <!-- templates/main.html -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-<head><meta charset="utf-8"><title>Main</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Rebecca&Georg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='herzG.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}" />
+</head>
 <body>
-  <h1>🎉 Willkommen auf der Hauptseite</h1>
+    <!-- Herz-Cursor & Musik -->
+    <!--<script src="{{ url_for('static', filename='cursor.js') }}"></script>-->
+    <audio id="hochzeitsmusik" autoplay loop hidden>
+      <source src="{{ url_for('static', filename='Musik.mp3') }}" type="audio/mpeg">
+  </audio>
+  <!--Bisous-->
+  <div class="bisous-top"><strong>BISOUS</strong></div>
+  <!--Hero GIF-->
+  <div class="hero">
+      <img src="{{ url_for('static', filename='RuG.png') }}" alt="Top Bild">
+  </div>
+    <!-- Begrüßung -->
+  <div class="section">
+      <h1>PLEASE COME CELEBRATE LOVE WITH US.</h1>
+      <p>12.07.2025 &nbsp;&nbsp; 17:00 UHR</p>
+      <p>EMBER OFC</p>
+  </div>
+
+  <!-- RSVP -->
+  <div class="section">
+    <a href="{{ url_for('antwort') }}" class="rsvp-button">💌RSVP HERE💌</a>
+</div>
+
+  <!-- Geschenke -->
+  <div class="section">
+      <p>FÜR UNS IST ES DAS GRÖSSTE GESCHENK, MIT DIR ZU FEIERN. FALLS DU UNS DARÜBER HINNAUS ETWAS SCHENKEN MÖCHTEST, FREUEN WIR UNS ÜBER:</p>
+      <br>DIE HOCHZEITSREISE
+      <br>DIE LISTE
+  </div>
+    <!-- Trauzeugen -->
+    <div class="section">
+      <p>TRAUZEUGEN:</p>
+      <div class="names">
+          <p>GEORG RICHTHOFEN</p>
+          <p>HANNAH WEIDNER</p>
+          <p>JAKOB RICHTER</p>
+          <p>LUCIA BUNNEMANN</p>
+          <p>MARKEIKE MARTIN</p>
+          <p>MARTIN MEUTER</p>
+      </div>
+  </div>
+  <div class="section">
+      <p>EMBER OFC, Wienerstraße 10, Berlin, Germany 10999</p>
+  </div>
+
+
+
+  <button id="musik-toggle" onclick="toggleMusik()">🔊</button>
   <a href="{{ url_for('logout') }}">Logout</a>
+  <script>
+      // Musik ein-/ausschalten
+      const audio = document.getElementById("hochzeitsmusik");
+      const btn = document.getElementById("musik-toggle");
+  
+      function toggleMusik() {
+          if (audio.paused) {
+              audio.play();
+              btn.textContent = "🔊";
+          } else {
+              audio.pause();
+              btn.textContent = "🔇";
+          }
+      }
+  </script>
+  
+  <script>
+      // Karten ein-/ausklappen
+      function toggleMap(id) {
+          const map = document.getElementById(id);
+          map.classList.toggle('collapsed');
+      }
+  </script>
+
+
 </body>
 </html>

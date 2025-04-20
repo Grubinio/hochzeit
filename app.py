@@ -16,6 +16,11 @@ PW_MEERSBURG = os.getenv("PASSWORD_MEERSBURG")
 PW_MAIN = os.getenv("PASSWORD_MAIN")
 PW_BOTH = os.getenv("PASSWORD_BOTH")
 
+print("PW_MEERSBURG:", PW_MEERSBURG)
+print("PW_MAIN:", PW_MAIN)
+print("PW_BOTH:", PW_BOTH)
+
+
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -59,3 +64,15 @@ def logout():
 # Nur für lokalen Test
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/antwort', methods=['GET', 'POST'])
+def antwort():
+    if request.method == 'POST':
+        render_template('zusage.html')
+        #name = request.form['name']
+        #email = request.form['email']
+        #zusage = request.form['zusage']
+        #nachricht = request.form.get('nachricht', '')
+        #flash("Danke für deine Antwort!", "success")
+        #return redirect(url_for('main.antwort'))
+    return render_template('zusage.html')
