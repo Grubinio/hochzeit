@@ -17,6 +17,9 @@ body {
   font-weight: 400;
   letter-spacing: 0.5px; /* optisch feiner */
 }
+a {
+  color: #000;
+}
 
 #musik-toggle {
   position: fixed;
