@@ -82,9 +82,28 @@
       {% endif %}
     {% endwith %}
     <form method="POST">
-      <input type="password" class="form-control" name="password" placeholder="Kennwort" required>
+      <div class="password-wrapper">
+        <input type="password" class="form-control" name="password" placeholder="Kennwort" required>
+        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="eye-icon"></i>
+      </div>
       <button type="submit" class="btn">Einloggen</button>
     </form>
   </div>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      const eyeIcon = document.getElementById("eye-icon");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+      } else {
+        passwordInput.type = "password";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+      }
+    }
+  </script>
 </body>
 </html>
