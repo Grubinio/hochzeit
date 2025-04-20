@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception as e:
+    print("Fehler beim dotenv-Import:", e)
+
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
