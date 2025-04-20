@@ -1,158 +1,18 @@
 <!-- templates/main.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Rebecca&Georg</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='herzG.png') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon/favicon.svg') }}" />
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}" />
-    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}" />
-</head>
+<head><meta charset="utf-8"><title>Main</title></head>
 <body>
-
-    <!-- Herz-Cursor & Musik -->
-    <!--<script src="{{ url_for('static', filename='cursor.js') }}"></script>-->
-    <audio id="hochzeitsmusik" autoplay loop hidden>
-        <source src="{{ url_for('static', filename='Musik.mp3') }}" type="audio/mpeg">
-    </audio>
-    <!--Bisous-->
-    <div class="bisous-top"><strong>BISOUS</strong></div>
-    <!--Hero GIF-->
-    <div class="hero">
-        <img src="{{ url_for('static', filename='RuG.png') }}" alt="Top Bild">
-    </div>
-    <!-- Begrüßung -->
-    <div class="section">
-        <h1>PLEASE COME CELEBRATE LOVE WITH US.</h1>
-        <p>12.07.2025 &nbsp;&nbsp; 17:00 UHR</p>
-        <p>EMBER OFC</p>
-    </div>
-    <!-- RSVP -->
-    <div class="section">
-        <a href="{{ url_for('app.antwort') }}" class="rsvp-button">💌RSVP HERE💌</a>
-    </div>
-    <!-- Geschenke -->
-    <div class="section">
-        <p>FÜR UNS IST ES DAS GRÖSSTE GESCHENK, MIT DIR ZU FEIERN. FALLS DU UNS DARÜBER HINNAUS ETWAS SCHENKEN MÖCHTEST, FREUEN WIR UNS ÜBER:</p>
-        <br>DIE HOCHZEITSREISE
-        <br>DIE LISTE
-    </div>
-    <!-- Trauzeugen -->
-    <div class="section">
-        <p>TRAUZEUGEN:</p>
-        <div class="names">
-            <p>GEORG RICHTHOFEN</p>
-            <p>HANNAH WEIDNER</p>
-            <p>JAKOB RICHTER</p>
-            <p>LUCIA BUNNEMANN</p>
-            <p>MARKEIKE MARTIN</p>
-            <p>MARTIN MEUTER</p>
-        </div>
-    </div>
-    <div class="section">
-        <p>EMBER OFC, Wienerstraße 10, Berlin, Germany 10999</p>
-    </div>
-
-<!-- Ort der Trauung – einklappbar 
-<section id="trauung" style="padding: 2rem;">
-    <h2 onclick="toggleMap('map1')" style="cursor: pointer;">📍 Trauung (🗺️Ausklappen)</h2>
-    <p>Neues Schloss Meersburg, Schlossplatz 12, 88709 Meersburg</p>
-    <div id="map1" class="map-container collapsed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2685.528381942147!2d9.269701375733698!3d47.69357838196807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479af8657a60569f%3A0x2f7f0a1765ad19ff!2sNeues%20Schloss%20Meersburg!5e0!3m2!1sde!2sit!4v1744611817340!5m2!1sde!2sit" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-</section>
--->
-
-<!-- Bilder 
-<section id="bilder" style="padding: 2rem; background-color: #f9f9f9;">
-    <h2>Bildergalerie</h2>
-    <div class="carousel-wrapper">
-      <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button> 
-        <div class="carousel-track" id="carousel-track">
-            <div class="carousel-slide"> <img src="{{ url_for('static', filename='3.jpg') }}" alt="Bild 2"></div>
-            <div class="carousel-slide"><img src="{{ url_for('static', filename='4.jpg') }}" alt="Bild 3"></div>
-            <div class="carousel-slide"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Bild 1"></div>
-        </div>
-      <button class="carousel-btn next" onclick="changeSlide(1)">❯</button> 
-    </div>
-  </section>
--->
-  
-    <button id="musik-toggle" onclick="toggleMusik()">🔊</button>
-
-    <script>
-        // Musik ein-/ausschalten
-        const audio = document.getElementById("hochzeitsmusik");
-        const btn = document.getElementById("musik-toggle");
-    
-        function toggleMusik() {
-            if (audio.paused) {
-                audio.play();
-                btn.textContent = "🔊";
-            } else {
-                audio.pause();
-                btn.textContent = "🔇";
-            }
-        }
-    </script>
-    
-    <script>
-        // Karten ein-/ausklappen
-        function toggleMap(id) {
-            const map = document.getElementById(id);
-            map.classList.toggle('collapsed');
-        }
-    </script>
-    <!--
-    <script>
-        let currentIndex = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const track = document.getElementById('carousel-track');
-      
-        function updateCarousel() {
-          const slideWidth = slides[0].offsetWidth + 16; // ggf. anpassen, wenn gap anders ist
-          const offset = (slideWidth * currentIndex) - (track.offsetWidth / 2) + (slideWidth / 2);
-      
-          track.style.transform = `translateX(-${offset}px)`;
-      
-          // Nur das aktive Slide bekommt die Klasse 'active'
-          slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === currentIndex);
-          });
-        }
-      
-        function changeSlide(direction) {
-          // Schleifenrotation mit Modulo
-          currentIndex = (currentIndex + direction + slides.length) % slides.length;
-          updateCarousel();
-        }
-      
-        // Automatische Rotation
-        setInterval(() => changeSlide(1), 5000);
-      
-        // Swipe-Gesten für Mobilgeräte
-        let startX = 0;
-        track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
-      
-        track.addEventListener('touchend', e => {
-          const diff = startX - e.changedTouches[0].clientX;
-          if (Math.abs(diff) > 50) {
-            if (diff > 0) changeSlide(1);  // nach links wischen
-            else changeSlide(-1);         // nach rechts wischen
-          }
-        }, { passive: true });
-      
-        // Initiales Setup
-        updateCarousel();
-      </script>
-    -->
-
-                   
+  <h1>🎉 Willkommen auf der Hauptseite</h1>
+  <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html><!-- templates/main.html -->
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><title>Main</title></head>
+<body>
+  <h1>🎉 Willkommen auf der Hauptseite</h1>
+  <a href="{{ url_for('logout') }}">Logout</a>
 </body>
 </html>
+<!-- templates/main.html -->
