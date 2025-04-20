@@ -19,16 +19,16 @@ body {
 }
 a {
   color: #000;
+  text-decoration: none;
 }
 
 .logout-bttn{
   position:left;
   width: auto;
   padding: 2px 5px 2px 5px;
+  margin:30px;
   background-color: #fff;
   border-radius: 20%;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  /*z-index: 1000;*/
   text-decoration: none;
   font-size: 0.7rem;
 }
@@ -92,15 +92,19 @@ a {
   max-width: 800px;
   transform: translateY(40px);
   animation: fadeInUp 0.8s ease-out forwards;
-  font-size:12px;
+  font-size:15px;
   font-family: 'Konkhmer Sleokchher';
   font-style: normal;
   color: #000000;
+  margin:30px;
   }
 
+.section-mrb h1 {
+  font-size:18px;
+}
+
 .section-mrb p {
-  /*margin: 1rem 0;*/
-  font-size:10px;
+  font-size:13px;
 }
 
 .names {

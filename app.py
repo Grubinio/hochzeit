@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 #dotenv_path = Path(__file__).resolve().parent / '.env'
 load_dotenv('/var/www/hochzeit/.env')
 
-
-
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
 
@@ -14,14 +12,6 @@ app.secret_key = os.getenv("SECRET_KEY", "dev-key")
 PW_MEERSBURG = os.getenv("PASSWORD_MEERSBURG")
 PW_MAIN = os.getenv("PASSWORD_MAIN")
 PW_BOTH = os.getenv("PASSWORD_BOTH")
-
-
-print("== DEBUG START ==")
-print("PW_MEERSBURG:", repr(os.getenv("PASSWORD_MEERSBURG")))
-print("PW_MAIN:", repr(os.getenv("PASSWORD_MAIN")))
-print("PW_BOTH:", repr(os.getenv("PASSWORD_BOTH")))
-print("== DEBUG END ==")
-
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -35,10 +25,6 @@ def login():
 
         elif entered_pw == PW_MAIN:
             session['access'] = 'main'
-            return redirect(url_for('main'))
-
-        elif entered_pw == PW_BOTH:
-            session['access'] = 'both'
             return redirect(url_for('main'))
 
         else:
