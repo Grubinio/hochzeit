@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin – Rückmeldungen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f3f3f3;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .export-button {
+            margin: 1rem 0;
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #cc99a2;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>💍 Rückmeldungen zur Hochzeit</h1>
+
+    <a href="{{ url_for('admin_csv_export') }}" class="export-button">📁 CSV Export</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>Zusage</th>
+                <th>Essen</th>
+                <th>Partner kommt</th>
+                <th>Partner Essen</th>
+                <th>Nachricht</th>
+                <th>Zeit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for eintrag in daten %}
+            <tr>
+                <td>{{ eintrag.name }}</td>
+                <td>{{ eintrag.email }}</td>
+                <td>{{ eintrag.zusage }}</td>
+                <td>{{ eintrag.essen }}</td>
+                <td>{{ eintrag.partner_zusage }}</td>
+                <td>{{ eintrag.partner_essen }}</td>
+                <td>{{ eintrag.nachricht | default('-') }}</td>
+                <td>{{ eintrag.eingegangen_am.strftime('%d.%m.%Y %H:%M') }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8">Noch keine Rückmeldungen vorhanden.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

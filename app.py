@@ -12,7 +12,7 @@ app.secret_key = os.getenv("SECRET_KEY", "dev-key")
 # Passwörter aus .env
 PW_MEERSBURG = os.getenv("PASSWORD_MEERSBURG")
 PW_MAIN = os.getenv("PASSWORD_MAIN")
-PW_BOTH = os.getenv("PASSWORD_BOTH")
+PW_ADMIN = os.getenv("PASSWORD_ADMIN")
 
 # Konfiguration für Sessions
 app.config['SESSION_COOKIE_SECURE'] = True          # nur über HTTPS
@@ -30,11 +30,17 @@ dbconfig = {
 }
 
 # Erstellen eines Connection Pools
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name="hochzeit_pool",
-    pool_size=5,
-    **dbconfig
-)
+try:
+    connection_pool = mysql.connector.pooling.MySQLConnectionPool(
+        pool_name="hochzeit_pool",
+        pool_size=5,
+        **dbconfig
+    )
+except mysql.connector.Error as err:
+    print("⚠️ Datenbankverbindung fehlgeschlagen – weiter im Offline-Modus.")
+    connection_pool = None
+
+
 def get_db_connection():
     return connection_pool.get_connection()
 
@@ -51,6 +57,10 @@ def login():
         elif entered_pw == PW_MAIN:
             session['access'] = 'main'
             return redirect(url_for('main'))
+        
+        elif entered_pw == PW_ADMIN:
+            session['access'] = 'admin'
+            return redirect(url_for('admin'))
 
         else:
             flash('Falsches Passwort – bitte erneut versuchen.', 'danger')
@@ -63,6 +73,52 @@ def main():
     if session.get('access') in ['main', 'both']:
         return render_template('main.html')
     return redirect(url_for('login'))
+
+from flask import Response
+import csv
+
+@app.route('/admin')
+def admin_view():
+    if session.get('access') not in ['main', 'both']:
+        return redirect(url_for('login'))
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM rueckmeldungen ORDER BY eingegangen_am DESC")
+        rueckmeldungen = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        flash(f"Fehler beim Laden der Daten: {e}", "danger")
+        rueckmeldungen = []
+
+    return render_template('admin.html', daten=rueckmeldungen)
+
+
+@app.route('/admin/csv')
+def admin_csv_export():
+    if session.get('access') not in ['main', 'both']:
+        return redirect(url_for('login'))
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT name, email, zusage, essen, partner_zusage, partner_essen, nachricht, eingegangen_am FROM rueckmeldungen ORDER BY eingegangen_am DESC")
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        return Response(f"Fehler beim CSV-Export: {e}", mimetype='text/plain')
+
+    def generate():
+        data = [["Name", "E-Mail", "Zusage", "Essen", "Partner kommt", "Partner Essen", "Nachricht", "Zeit"]]
+        data.extend(rows)
+        for row in data:
+            yield ";".join(str(x).replace("\n", " ").replace(";", ",") for x in row) + "\n"
+
+    return Response(generate(), mimetype='text/csv', headers={"Content-Disposition": "attachment;filename=zusagen.csv"})
+
 
 @app.route('/meersburg')
 def meersburg():
