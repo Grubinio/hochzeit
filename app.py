@@ -70,7 +70,7 @@ def login():
 
 @app.route('/main')
 def main():
-    if session.get('access') in ['main', 'both']:
+    if session.get('access') in ['main']:
         return render_template('main.html')
     return redirect(url_for('login'))
 
@@ -79,7 +79,7 @@ import csv
 
 @app.route('/admin')
 def admin_view():
-    if session.get('access') not in ['main', 'admin']:
+    if session.get('access') not in ['admin']:
         return redirect(url_for('login'))
 
     try:
@@ -94,30 +94,6 @@ def admin_view():
         rueckmeldungen = []
 
     return render_template('admin.html', daten=rueckmeldungen)
-
-
-@app.route('/admin/csv')
-def admin_csv_export():
-    if session.get('access') not in ['main', 'both']:
-        return redirect(url_for('login'))
-
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT name, email, zusage, essen, partner_zusage, partner_essen, nachricht, eingegangen_am FROM rueckmeldungen ORDER BY eingegangen_am DESC")
-        rows = cursor.fetchall()
-        cursor.close()
-        conn.close()
-    except Exception as e:
-        return Response(f"Fehler beim CSV-Export: {e}", mimetype='text/plain')
-
-    def generate():
-        data = [["Name", "E-Mail", "Zusage", "Essen", "Partner kommt", "Partner Essen", "Nachricht", "Zeit"]]
-        data.extend(rows)
-        for row in data:
-            yield ";".join(str(x).replace("\n", " ").replace(";", ",") for x in row) + "\n"
-
-    return Response(generate(), mimetype='text/csv', headers={"Content-Disposition": "attachment;filename=zusagen.csv"})
 
 
 @app.route('/meersburg')
