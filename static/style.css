@@ -1,9 +1,11 @@
+html{
+  cursor: url('herzG.png'), auto;
+}
 html, body {
   height: 100%;
   width: 100%;
 }
 body {
-  cursor: url('herzG.png'), auto;
   margin: 0;
   padding: 0px;
   font-family: 'Konkhmer Sleokchher', cursive;
