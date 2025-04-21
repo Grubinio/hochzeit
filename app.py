@@ -4,6 +4,8 @@ import mysql.connector.pooling
 import sys
 import logging
 
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+
 
 
 from dotenv import load_dotenv
@@ -101,6 +103,7 @@ def admin_view():
         conn.close()
     except Exception as e:
         print("❌ Fehler beim Laden der Daten:", e, file=sys.stderr)
+        logging.exception("💥 Fehler beim Laden der Daten:")
         flash(f"Fehler beim Laden der Daten: {e}", "danger")
         rueckmeldungen = []
 
