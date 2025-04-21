@@ -60,7 +60,8 @@
                 <td>{{ eintrag.partner_zusage }}</td>
                 <td>{{ eintrag.partner_essen }}</td>
                 <td>{{ eintrag.nachricht | default('-') }}</td>
-                <td>{{ eintrag.eingegangen_am.strftime('%d.%m.%Y %H:%M') }}</td>
+                <td>{{ eintrag.eingegangen_am }}</td>
+                  
             </tr>
             {% else %}
             <tr>

@@ -77,9 +77,11 @@ def main():
 from flask import Response
 import csv
 
+from datetime import datetime
+
 @app.route('/admin')
 def admin_view():
-    if session.get('access') not in ['admin']:
+    if session.get('access') not in ['main', 'both']:
         return redirect(url_for('login'))
 
     try:
@@ -87,13 +89,19 @@ def admin_view():
         cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT * FROM rueckmeldungen ORDER BY eingegangen_am DESC")
         rueckmeldungen = cursor.fetchall()
+        # Datum formatieren
+        for eintrag in rueckmeldungen:
+            if isinstance(eintrag["eingegangen_am"], datetime):
+                eintrag["eingegangen_am"] = eintrag["eingegangen_am"].strftime('%d.%m.%Y %H:%M')
         cursor.close()
         conn.close()
     except Exception as e:
+        print("Fehler beim Laden der Daten:", e)
         flash(f"Fehler beim Laden der Daten: {e}", "danger")
         rueckmeldungen = []
 
     return render_template('admin.html', daten=rueckmeldungen)
+
 
 
 @app.route('/meersburg')
