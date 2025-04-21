@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
 import mysql.connector.pooling
+import sys
+import logging
+
+
 
 from dotenv import load_dotenv
 #dotenv_path = Path(__file__).resolve().parent / '.env'
@@ -96,7 +100,7 @@ def admin_view():
         cursor.close()
         conn.close()
     except Exception as e:
-        print("Fehler beim Laden der Daten:", e)
+        print("❌ Fehler beim Laden der Daten:", e, file=sys.stderr)
         flash(f"Fehler beim Laden der Daten: {e}", "danger")
         rueckmeldungen = []
 
