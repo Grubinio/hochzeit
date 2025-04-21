@@ -34,7 +34,7 @@
       }
 
     form {
-      background-color: white;
+      /*background-color: white;*/
       padding: 2rem;
     }
 
@@ -47,6 +47,12 @@
       border: 1px solid #ced4da;
       border-radius: 0.375rem;
       margin-bottom: 1rem;
+    }
+
+    img {
+      position: relative;
+      width: 80%;
+      clip-path: inset(70px 0px 70px 0px);
     }
 
     button.btn {
@@ -81,7 +87,7 @@
 </head>
 <body class="bg-light d-flex align-items-center vh-100">
   <div class="container">
-    <h2>🤍</h2>
+    <h2><img src="{{ url_for('static', filename='schaefchen.jpg') }}" alt="Schäfchen"></h2>
     <h2>REBECCA & GEORG</h2>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -95,7 +101,7 @@
         <input type="password" class="form-control" name="password" placeholder="Kennwort" required>
         <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="eye-icon" title="Passwort anzeigen/ausblenden"></i>
       </div>
-      <button type="submit" class="btn">Einloggen</button>
+      <button type="submit" class="btn">🤍 Einloggen 🤍</button>
     </form>
   </div>
 
@@ -114,5 +120,6 @@
       }
     }
   </script>
+  <script defer data-domain="gigiriri.eu" src="https://plausible.io/js/script.js"></script>
 </body>
 </html>
