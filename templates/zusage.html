@@ -29,30 +29,75 @@
     <form method="POST" action="{{ url_for('antwort') }}" class="rsvp-form">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" required>
+            <input type="text" name="name" id="name" required autocomplete="name">
         </div>
     
         <div class="form-group">
             <label for="email">E-Mail</label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email" required autocomplete="email">
         </div>
     
         <div class="form-group">
-            <label>Kommt ihr?</label>
-            <div class="radio-group">
-                <label><input type="radio" name="zusage" value="Ja" required> Ja</label>
-                <label><input type="radio" name="zusage" value="Nein"> Nein</label>
-                <label><input type="radio" name="zusage" value="Unentschieden"> Weiß noch nicht</label>
+            <label>KOMMST DU?</label>
+            <div class="button-toggle-group centered-toggle">
+                <input type="radio" id="zusage-ja" name="zusage" value="Ja" required>
+                <label for="zusage-ja">Ja</label>
+                <input type="radio" id="zusage-nein" name="zusage" value="Nein">
+                <label for="zusage-nein">Nein</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>FOOD</label>
+            <div class="button-toggle-group centered-toggle">
+                <input type="radio" id="essen-veg" name="essen" value="Veg" required>
+                <label for="essen-veg">VEG</label>
+                <input type="radio" id="essen-all" name="essen" value="All">
+                <label for="essen-all">ALL</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>MIT PARTNER/IN?</label>
+            <div class="button-toggle-group centered-toggle">
+                <input type="radio" id="partner-ja" name="zusage-p" value="Ja" required>
+                <label for="partner-ja">Ja</label>
+                <input type="radio" id="partner-nein" name="zusage-p" value="Nein">
+                <label for="partner-nein">Nein</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>FOOD</label> <!--Essen Partner/in-->
+            <div class="button-toggle-group centered-toggle">
+                <input type="radio" id="essen-veg-p" name="essen-p" value="Veg">
+                <label for="essen-veg-p">VEG</label>
+                <input type="radio" id="essen-all-p" name="essen-p" value="All">
+                <label for="essen-all-p">ALL</label>
             </div>
         </div>
     
         <div class="form-group">
-            <label for="nachricht">Nachricht</label>
+            <label for="nachricht">💌 LOVE MESSAGES 💌</label>
             <textarea name="nachricht" id="nachricht" rows="4"></textarea>
         </div>
     
-        <button type="submit" class="submit-button">💌 Absenden</button>
+        <button type="submit" class="submit-button">SEND</button>
     </form>
+    <a href="{{ url_for('main') }}">Zurück</a>
+    <button id="musik-toggle" onclick="toggleMusik()">🔊</button>
+    <script>
+        // Musik ein-/ausschalten
+        const audio = document.getElementById("hochzeitsmusik");
+        const btn = document.getElementById("musik-toggle");
+    
+        function toggleMusik() {
+            if (audio.paused) {
+                audio.play();
+                btn.textContent = "🔊";
+            } else {
+                audio.pause();
+                btn.textContent = "🔇";
+            }
+        }
+    </script>
     <script defer data-domain="gigiriri.eu" src="https://plausible.io/js/script.js"></script>  
 </body>
 </html>
