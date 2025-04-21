@@ -3,6 +3,7 @@ import os
 import mysql.connector.pooling
 import sys
 import logging
+import traceback
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
@@ -81,29 +82,34 @@ def main():
     return redirect(url_for('login'))
 
 from flask import Response
-import csv
 
-from datetime import datetime
+
 
 @app.route('/admin')
 def admin_view():
-    if session.get('access') != 'admin':
-        return redirect(url_for('login'))
-
     try:
+        access = session.get('access')
+        if access != 'admin':
+            return f"<h1>Zugriff verweigert. Aktuell: {access}</h1>"
+
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM rueckmeldungen ORDER BY eingegangen_am DESC")
-        rueckmeldungen = cursor.fetchall()
+        cursor.execute("SELECT name, email FROM rueckmeldungen ORDER BY eingegangen_am DESC")
+        daten = cursor.fetchall()
         cursor.close()
         conn.close()
+
+        # Rückgabe in HTML ohne Template
+        html = "<h1>Admin-Daten</h1><ul>"
+        for eintrag in daten:
+            html += f"<li>{eintrag['name']} ({eintrag['email']})</li>"
+        html += "</ul>"
+        return html
+
     except Exception as e:
-        import sys
-        print("❌ Fehler beim Laden der Daten:", e, file=sys.stderr)
-        return f"<h1>Fehler: {e}</h1>", 500
-
-    return render_template("admin.html", rueckmeldungen=rueckmeldungen)
-
+        tb = traceback.format_exc()
+        print("❌ Fehler in /admin:\n", tb, file=sys.stderr)
+        return f"<h1>Fehler: {e}</h1><pre>{tb}</pre>", 500
 
 
 
