@@ -67,7 +67,7 @@ def login():
         
         elif entered_pw == PW_ADMIN:
             session['access'] = 'admin'
-            return redirect(url_for('admin'))
+            return redirect(url_for('admin_view'))
 
         else:
             flash('Falsches Passwort – bitte erneut versuchen.', 'danger')
