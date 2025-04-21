@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}"/>
     <title>Login</title>
   <style>
     body {
@@ -52,7 +54,7 @@
     img {
       position: relative;
       width: 80%;
-      clip-path: inset(70px 0px 70px 0px);
+      clip-path: inset(60px 0px 80px 0px);
     }
 
     button.btn {
@@ -87,7 +89,7 @@
 </head>
 <body class="bg-light d-flex align-items-center vh-100">
   <div class="container">
-    <h2><img src="{{ url_for('static', filename='schaefchen.jpg') }}" alt="Schäfchen"></h2>
+    <h2><img src="{{ url_for('static', filename='schaefchen_brief.jpg') }}" alt="Schäfchen"></h2>
     <h2>REBECCA & GEORG</h2>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
