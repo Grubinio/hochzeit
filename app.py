@@ -87,23 +87,23 @@ from datetime import datetime
 
 @app.route('/admin')
 def admin_view():
-    if session.get('access') not in ['admin']:
+    if session.get('access') not in ['main', 'both']:
         return redirect(url_for('login'))
 
     try:
         conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT name, email FROM rueckmeldungen LIMIT 5")
-        rows = cursor.fetchall()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM rueckmeldungen ORDER BY eingegangen_am DESC")
+        rueckmeldungen = cursor.fetchall()
         cursor.close()
         conn.close()
     except Exception as e:
         import sys
-        print("❌ Fehler beim SELECT:", e, file=sys.stderr)
+        print("❌ Fehler beim Laden der Daten:", e, file=sys.stderr)
         return f"<h1>Fehler: {e}</h1>", 500
 
-    # Gibt die Daten direkt im Browser aus
-    return f"<h1>Rückmeldungen</h1><pre>{rows}</pre>"
+    return render_template("admin.html", rueckmeldungen=rueckmeldungen)
+
 
 
 
