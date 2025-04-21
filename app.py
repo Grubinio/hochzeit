@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
+import mysql.connector.pooling
 
 from dotenv import load_dotenv
 #dotenv_path = Path(__file__).resolve().parent / '.env'
@@ -18,6 +19,26 @@ app.config['SESSION_COOKIE_SECURE'] = True          # nur über HTTPS
 app.config['SESSION_COOKIE_HTTPONLY'] = True        # nicht per JS lesbar
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'       # gegen CSRF
 
+
+
+# Konfiguration für MySQL-Datenbankverbindung
+dbconfig = {
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME")
+}
+
+# Erstellen eines Connection Pools
+connection_pool = mysql.connector.pooling.MySQLConnectionPool(
+    pool_name="hochzeit_pool",
+    pool_size=5,
+    **dbconfig
+)
+def get_db_connection():
+    return connection_pool.get_connection()
+
+#Routen
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -61,14 +82,36 @@ if __name__ == '__main__':
 @app.route('/antwort', methods=['GET', 'POST'])
 def antwort():
     if request.method == 'POST':
-        render_template('zusage.html')
-        #name = request.form['name']
-        #email = request.form['email']
-        #zusage = request.form['zusage']
-        #nachricht = request.form.get('nachricht', '')
-        #flash("Danke für deine Antwort!", "success")
-        #return redirect(url_for('main.antwort'))
-    return render_template('zusage.html')
+        name = request.form.get("name")
+        email = request.form.get("email")
+        zusage = request.form.get("zusage")
+        essen = request.form.get("essen")
+        partner_zusage = request.form.get("zusage-p")
+        partner_essen = request.form.get("essen-p")
+        nachricht = request.form.get("nachricht")
+        session_id = session.get("access", None)  # oder "user_id" falls du das speicherst
+
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO rueckmeldungen 
+                (name, email, zusage, essen, partner_zusage, partner_essen, nachricht, session_id)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """, (name, email, zusage, essen, partner_zusage, partner_essen, nachricht, session_id))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            flash("Danke für deine Antwort 💌", "success")
+        except Exception as e:
+            print("Fehler beim Einfügen:", e)
+            flash("Fehler beim Speichern 😢", "danger")
+
+        return redirect(url_for("main"))
+
+    # GET → zeigt das Formular an
+    return render_template("zusage.html")
+
 
 @app.errorhandler(404)
 def page_not_found(e):
