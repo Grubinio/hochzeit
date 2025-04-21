@@ -87,7 +87,7 @@ from flask import Response
 
 @app.route('/admin')
 def admin_view():
-    if session.get('access') not in ['main', 'both']:
+    if session.get('access') not in ['admin']:
         return redirect(url_for('login'))
 
     try:
