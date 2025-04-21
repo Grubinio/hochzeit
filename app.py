@@ -169,4 +169,6 @@ def page_not_found(e):
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('500.html', error=e), 500
+    import traceback
+    tb = traceback.format_exc()
+    return f"<h1>Fehler 500</h1><p>{e}</p><pre>{tb}</pre>", 500
