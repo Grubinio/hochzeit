@@ -87,29 +87,23 @@ from flask import Response
 
 @app.route('/admin')
 def admin_view():
-    try:
-        access = session.get('access')
-        if access != 'admin':
-            return f"<h1>Zugriff verweigert. Aktuell: {access}</h1>"
+    if session.get('access') not in ['main', 'both']:
+        return redirect(url_for('login'))
 
+    try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT name, email FROM rueckmeldungen ORDER BY eingegangen_am DESC")
-        daten = cursor.fetchall()
+        cursor.execute("SELECT * FROM rueckmeldungen ORDER BY eingegangen_am DESC")
+        rueckmeldungen = cursor.fetchall()
         cursor.close()
         conn.close()
-
-        # Rückgabe in HTML ohne Template
-        html = "<h1>Admin-Daten</h1><ul>"
-        for eintrag in daten:
-            html += f"<li>{eintrag['name']} ({eintrag['email']})</li>"
-        html += "</ul>"
-        return html
-
     except Exception as e:
-        tb = traceback.format_exc()
-        print("❌ Fehler in /admin:\n", tb, file=sys.stderr)
-        return f"<h1>Fehler: {e}</h1><pre>{tb}</pre>", 500
+        import sys
+        print("❌ Fehler beim Laden der Daten:", e, file=sys.stderr)
+        return f"<h1>Fehler: {e}</h1>", 500
+
+    return render_template("admin.html", rueckmeldungen=rueckmeldungen)
+
 
 
 
