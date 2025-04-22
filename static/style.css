@@ -138,6 +138,7 @@ a {
   align-items: center;
   font-size: 15px;
   line-height: 15px;
+  /* text-transform: uppercase; */
 }
 
 .rsvp-button {

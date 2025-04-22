@@ -105,9 +105,6 @@ def admin_view():
     return render_template("admin.html", rueckmeldungen=rueckmeldungen)
 
 
-
-
-
 @app.route('/meersburg')
 def meersburg():
     if session.get('access') in ['meersburg']:
@@ -155,6 +152,10 @@ def antwort():
 
     # GET → zeigt das Formular an
     return render_template("zusage.html")
+
+@app.route('/impressum')
+def impressum():
+    return render_template('impressum.html')
 
 @app.route('/reise')
 def reise():

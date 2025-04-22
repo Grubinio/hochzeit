@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}"/>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}"/>
@@ -48,7 +47,7 @@
       width: 100%;
       padding: 0.75rem;
       font-size: 1rem;
-      border: 1px solid #ced4da;
+      border: 1px solid #b0b9c2;
       border-radius: 0.375rem;
       margin-bottom: 1rem;
     }
@@ -75,6 +74,23 @@
 
     button.btn:hover {
       background-color: #1a1e21;
+    }
+
+    .impress{
+      display: block;
+      width: auto;
+      padding: 0.75rem;
+      font-size: 0.7rem;
+      border: none;
+      color: #535353;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .impress a{
+      text-decoration: none;
+      color: #535353;
     }
 
     .alert {
@@ -107,7 +123,11 @@
       </div>
       <button type="submit" class="btn">🤍Einloggen🤍</button>
     </form>
+    <br><br><br><br>
+    <div class="impress"><a href="{{ url_for('impressum') }}">impressum</a></div>
   </div>
+
+
 
   <script>
     function togglePassword() {
