@@ -82,19 +82,31 @@ a {
 }
 
 .section {
-  padding: 2rem 5px 6rem 5px;
+  padding: 1rem 5px 1rem 5px;
   max-width: 600px;
+  font-size:13px;
   transform: translateY(40px);
-  animation: fadeInUp 0.8s ease-out forwards;
   font-family: 'Konkhmer Sleokchher';
   font-style: normal;
-  line-height: 36px;
   color: #000000;
   }
+  .section h1 {
+    font-size: 24px;
+  }
+  .section h2 {
+  font-size: 24px;
+}
 
 .section p {
-  /*margin: 1rem 0;*/
-  font-size: 1.25rem;
+  font-size:13px;
+  line-height: 15px;
+  padding: 0px 0px 10px 0px;
+  margin: 0px 0px 0px 0px ;
+}
+.section li {
+  font-size:13px;
+  display: block;
+  text-align: center;
 }
 
 .section-mrb {
@@ -124,13 +136,8 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding:0;
-  gap: 0.3rem;
   font-size: 15px;
-  line-height: 27px;
-}
-.names p{
-  margin: 0rem 0;
+  line-height: 15px;
 }
 
 .rsvp-button {
@@ -139,7 +146,6 @@ a {
   text-transform: uppercase;
   font-size: 1.4rem;
   background-color: rgb(255, 255, 255);
-  padding: 1rem 3rem;
   border-radius: 0;
   text-decoration: none;
 }

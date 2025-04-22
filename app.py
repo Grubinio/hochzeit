@@ -110,7 +110,7 @@ def admin_view():
 
 @app.route('/meersburg')
 def meersburg():
-    if session.get('access') in ['meersburg', 'both']:
+    if session.get('access') in ['meersburg']:
         return render_template('meersburg.html')
     return redirect(url_for('login'))
 
@@ -156,6 +156,11 @@ def antwort():
     # GET → zeigt das Formular an
     return render_template("zusage.html")
 
+@app.route('/reise')
+def reise():
+    if session.get('access') in ['meersburg', 'main']:
+        return render_template('reise.html')
+    return redirect(url_for('login'))
 
 @app.errorhandler(404)
 def page_not_found(e):
