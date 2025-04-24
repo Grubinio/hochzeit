@@ -141,7 +141,10 @@ a {
 .section-mrb p {
   font-size:13px;
 }
-
+.section-mrb a {
+  font-size: 15px;
+  text-transform: uppercase;
+}
 .names {
   display: flex;
   flex-direction: column;
