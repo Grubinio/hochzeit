@@ -122,6 +122,18 @@ a {
   display: block;
   text-align: center;
 }
+.section-rsvp {
+  padding: 1rem 5px 1rem 5px;
+  max-width: 600px;
+  font-size:13px;
+  transform: translateY(40px);
+  font-family: 'Konkhmer Sleokchher';
+  font-style: normal;
+  color: #000000;
+  }
+  .section-rsvp a {
+    font-size: 16px;
+  }
 
 .section-mrb {
   /*padding: 2rem 5px 6rem 5px;*/
