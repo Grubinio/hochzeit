@@ -127,6 +127,7 @@ def antwort():
         zusage = request.form.get("zusage")
         essen = request.form.get("essen")
         partner_zusage = request.form.get("zusage-p")
+        name_p = request.form.get("name_p")
         partner_essen = request.form.get("essen-p")
         nachricht = request.form.get("nachricht")
         session_id = session.get("access", None)  # oder "user_id" falls du das speicherst
@@ -136,9 +137,9 @@ def antwort():
             cursor = conn.cursor()
             cursor.execute("""
                 INSERT INTO rueckmeldungen 
-                (name, email, zusage, essen, partner_zusage, partner_essen, nachricht, session_id)
+                (name, email, zusage, essen, partner_zusage, name_p, partner_essen, nachricht, session_id)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-            """, (name, email, zusage, essen, partner_zusage, partner_essen, nachricht, session_id))
+            """, (name, email, zusage, essen, partner_zusage, name_p, partner_essen, nachricht, session_id))
             conn.commit()
             cursor.close()
             conn.close()
@@ -147,7 +148,7 @@ def antwort():
             print("Fehler beim Einfügen:", e)
             flash("Fehler beim Speichern 😢", "danger")
 
-        return redirect(url_for("main"))
+        return redirect(url_for("antwort"))
 
     # GET → zeigt das Formular an
     return render_template("zusage.html")

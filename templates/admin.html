@@ -62,6 +62,7 @@
                 <th>Zusage</th>
                 <th>Essen</th>
                 <th>Partner</th>
+                <th>Partner Name</th>
                 <th>Partner Essen</th>
                 <th>Nachricht</th>
                 <th>Zeit</th>
@@ -75,6 +76,7 @@
                 <td>{{ eintrag.zusage }}</td>
                 <td>{{ eintrag.essen }}</td>
                 <td>{{ eintrag.partner_zusage }}</td>
+                <td>{{ eintrag.name_p or '-' }}</td>
                 <td>{{ eintrag.partner_essen or '-' }}</td>
                 <td>{{ eintrag.nachricht or '-' }}</td>
                 <td>{{ eintrag.eingegangen_am.strftime('%d.%m.%Y %H:%M') }}</td>
