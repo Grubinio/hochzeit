@@ -138,7 +138,7 @@ def antwort():
             cursor.execute("""
                 INSERT INTO rueckmeldungen 
                 (name, email, zusage, essen, partner_zusage, name_p, partner_essen, nachricht, session_id)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (name, email, zusage, essen, partner_zusage, name_p, partner_essen, nachricht, session_id))
             conn.commit()
             cursor.close()
