@@ -27,20 +27,17 @@
     <div class="hero">
         <img src="{{ url_for('static', filename='RuG.png') }}" alt="Top Bild">
     </div>
-
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-messages">
                 {% for category, message in messages %}
                 <div class="alert alert-{{ category }}">
-                {{ message }}
+                <br>{{ message }}
                 </div>
                 {% endfor %}
             </div>
         {% endif %}
     {% endwith %}
-
-
     <form method="POST" action="{{ url_for('antwort') }}" class="rsvp-form">
         <div class="form-group">
             <label for="name">Name</label>
