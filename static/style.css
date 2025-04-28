@@ -221,8 +221,8 @@ a {
 .form-group input[type="email"],
 .form-group textarea {
   width: 100%;
-  padding: 0.6rem 0.9rem;
-  border: 1px solid #ccc;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ccccccad;
   border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
