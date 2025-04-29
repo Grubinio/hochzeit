@@ -249,7 +249,7 @@ a {
 .button-toggle-group input[type="radio"]:checked + label {
   background-color: #E4F3FD;
   color: rgb(0, 0, 0);
-  border: 1px solid #000000;
+  border: 1px solid #3f3b51;
   font-weight: bold;
 }
 
