@@ -227,7 +227,7 @@ a {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 .button-toggle-group input[type="radio"] {
@@ -241,7 +241,6 @@ a {
   background-color: #E7c4f9;
   color: #ffffff;
   cursor: url('herzG.png'), auto;/*pointer;*/
-  font-weight: bold;
   transition: all 0.2s ease-in-out;
   min-width: 80px;
   text-align: center;
@@ -251,6 +250,7 @@ a {
   background-color: #E4F3FD;
   color: rgb(0, 0, 0);
   border: 1px solid #000000;
+  font-weight: bold;
 }
 
 .alert {
