@@ -41,17 +41,17 @@
     {% endwith %}
     <form method="POST" action="{{ url_for('antwort') }}" class="rsvp-form">
         <div class="form-group">
-            <label for="name">NAME</label>
+            <label style="margin-top: 2rem" for="name">NAME</label>
             <input type="text" name="name" id="name" required autocomplete="name">
         </div>
     
         <div class="form-group">
-            <label for="email">E-MAIL</label>
+            <label style="margin-top: 5px" for="email">E-MAIL</label>
             <input type="email" name="email" id="email" required autocomplete="email">
         </div>
     
         <div class="form-group">
-            <label>KOMMST DU?</label>
+            <label style="margin-top: 2rem">KOMMST DU?</label>
             <div class="button-toggle-group centered-toggle">
                 <input type="radio" id="zusage-ja" name="zusage" value="Ja" required>
                 <label for="zusage-ja">JA</label>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>ISST DU:</label>
+            <label style="margin-top: 5px">ISST DU:</label>
             <div class="button-toggle-group centered-toggle">
                 <input type="radio" id="essen-veg" name="essen" value="Veg" required>
                 <label for="essen-veg">VEG</label>
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>MIT PARTNER/IN?</label>
+            <label style="margin-top: 5px">MIT +1?</label>
             <div class="button-toggle-group centered-toggle">
                 <input type="radio" id="partner-ja" name="zusage-p" value="Ja" required>
                 <label for="partner-ja">JA</label>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>FOOD</label> <!--Essen Partner/in-->
+            <label style="margin-top: 5px">FOOD +1</label> <!--Essen Partner/in-->
             <div class="button-toggle-group centered-toggle">
                 <input type="radio" id="essen-veg-p" name="essen-p" value="Veg">
                 <label for="essen-veg-p">VEG</label>
