@@ -41,12 +41,12 @@
     {% endwith %}
     <form method="POST" action="{{ url_for('antwort') }}" class="rsvp-form">
         <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">NAME</label>
             <input type="text" name="name" id="name" required autocomplete="name">
         </div>
     
         <div class="form-group">
-            <label for="email">E-Mail</label>
+            <label for="email">E-MAIL</label>
             <input type="email" name="email" id="email" required autocomplete="email">
         </div>
     
@@ -54,13 +54,13 @@
             <label>KOMMST DU?</label>
             <div class="button-toggle-group centered-toggle">
                 <input type="radio" id="zusage-ja" name="zusage" value="Ja" required>
-                <label for="zusage-ja">Ja</label>
+                <label for="zusage-ja">JA</label>
                 <input type="radio" id="zusage-nein" name="zusage" value="Nein">
-                <label for="zusage-nein">Nein</label>
+                <label for="zusage-nein">NEIN</label>
             </div>
         </div>
         <div class="form-group">
-            <label>FOOD</label>
+            <label>ISST DU:</label>
             <div class="button-toggle-group centered-toggle">
                 <input type="radio" id="essen-veg" name="essen" value="Veg" required>
                 <label for="essen-veg">VEG</label>
@@ -72,16 +72,11 @@
             <label>MIT PARTNER/IN?</label>
             <div class="button-toggle-group centered-toggle">
                 <input type="radio" id="partner-ja" name="zusage-p" value="Ja" required>
-                <label for="partner-ja">Ja</label>
+                <label for="partner-ja">JA</label>
                 <input type="radio" id="partner-nein" name="zusage-p" value="Nein">
-                <label for="partner-nein">Nein</label>
+                <label for="partner-nein">NEIN</label>
             </div>
         </div>
-        <div class="form-group">
-            <label for="name_p">PARTNER/IN</label>
-            <textarea name="name_p" id="name_p" rows="1"></textarea>
-        </div>
-
         <div class="form-group">
             <label>FOOD</label> <!--Essen Partner/in-->
             <div class="button-toggle-group centered-toggle">

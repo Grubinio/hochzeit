@@ -243,8 +243,8 @@ a {
   padding: 6px 15px;
   /*border: 2px solid #000000;*/
   border-radius: 30px;
-  background-color: rgb(191, 191, 191);
-  color: #727272;
+  background-color: #E7c4f9;
+  color: #ffffff;
   cursor: url('herzG.png'), auto;/*pointer;*/
   font-weight: bold;
   transition: all 0.2s ease-in-out;
@@ -255,6 +255,7 @@ a {
 .button-toggle-group input[type="radio"]:checked + label {
   background-color: #E4F3FD;
   color: rgb(0, 0, 0);
+  border: 1px solid #000000;
 }
 
 .alert {
