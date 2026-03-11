@@ -115,10 +115,6 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-# Nur für lokalen Test
-if __name__ == '__main__':
-    app.run() #debug=True
-
 @app.route('/antwort', methods=['GET', 'POST'])
 def antwort():
     if request.method == 'POST':
@@ -172,3 +168,10 @@ def internal_server_error(e):
     import traceback
     tb = traceback.format_exc()
     return f"<h1>Fehler 500</h1><p>{e}</p><pre>{tb}</pre>", 500
+
+
+
+
+# Nur für lokalen Test
+if __name__ == '__main__':
+    app.run() #debug=True
