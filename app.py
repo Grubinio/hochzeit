@@ -55,7 +55,7 @@ def get_db_connection():
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        entered_pw = request.form.get('password').strip()
+        entered_pw = (request.form.get('password') or '').strip()
 
         if entered_pw == PW_MEERSBURG:
             session['access'] = 'meersburg'
